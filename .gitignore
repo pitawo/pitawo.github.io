@@ -1,0 +1,30 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Node / Build outputs (将来的にバンドラー導入時に備えて)
+node_modules/
+dist/
+build/
+.cache/
+
+# Windows shortcuts
+*.url
+
+# VSCode workspace（個人設定が混入しがち）
+*.code-workspace
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Drafts / personal notes
+drafts/
+TODO.local.md
