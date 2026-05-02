@@ -1,0 +1,389 @@
+/* Enhanced Animations CSS */
+
+/* Hero Section Animations */
+@keyframes heroFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-content h2 {
+  animation: heroFadeIn 0.8s ease-out;
+  animation-fill-mode: both;
+}
+
+/* Active nav state */
+.navbar a {
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.navbar a.active {
+  color: #000;
+}
+
+.navbar a:hover {
+  color: #666;
+}
+
+/* Header shrink with smooth transitions */
+header {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+header.shrink .navbar {
+  padding: 0.5rem 2rem;
+  transition: padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+header.shrink .navbar h1 {
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Staggered reveal animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px) rotateX(10deg);
+  transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0) rotateX(0);
+}
+
+/* Staggered animation delays */
+.reveal:nth-child(1) {
+  transition-delay: 0.1s;
+}
+
+.reveal:nth-child(2) {
+  transition-delay: 0.2s;
+}
+
+.reveal:nth-child(3) {
+  transition-delay: 0.3s;
+}
+
+.reveal:nth-child(4) {
+  transition-delay: 0.4s;
+}
+
+.reveal:nth-child(5) {
+  transition-delay: 0.5s;
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.reveal-left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.reveal-right.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Work card sophisticated animations */
+@keyframes cardFloat {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes imageScale {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.work-card {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  overflow: hidden;
+}
+
+.work-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.6s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.work-card:hover {
+  transform: translateY(-8px) rotateX(2deg) rotateY(2deg);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.work-card:hover::before {
+  left: 100%;
+}
+
+.work-card .work-image {
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.work-card:hover .work-image img {
+  transform: scale(1.05) rotate(1deg);
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.work-card .work-info h3 {
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  position: relative;
+}
+
+.work-card:hover .work-info h3 {
+  transform: translateX(5px);
+  color: #000;
+}
+
+.work-card .work-description {
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) 0.1s;
+}
+
+.work-card:hover .work-description {
+  transform: translateX(3px);
+}
+
+/* Section title animations */
+@keyframes slideInFromTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.section-title {
+  animation: slideInFromTop 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* Social links micro-interactions */
+.social-link {
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+}
+
+.social-link::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+  z-index: 0;
+}
+
+.social-link span {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.social-link:hover {
+  transform: translateY(-3px) scale(1.05);
+}
+
+.social-link:hover::after {
+  left: 100%;
+}
+
+.social-link:hover span {
+  transform: scale(1.1);
+}
+
+/* Scroll progress bar with gradient */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 0;
+  background: linear-gradient(90deg, #667eea, #f093fb, #4facfe, #43e97b);
+  background-size: 400% 100%;
+  animation: gradientShift 3s ease infinite;
+  z-index: 1100;
+  transition: width 0.1s ease;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 0%;
+  }
+
+  50% {
+    background-position: 100% 0%;
+  }
+
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+/* Loading animation for page */
+@keyframes pageLoad {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+body {
+  animation: pageLoad 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Contact form animations */
+.contact-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-item a {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.contact-item a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(51, 51, 51, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.contact-item a:hover::before {
+  left: 100%;
+}
+
+/* Simple toast animation */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, .85);
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  font-size: .9rem;
+  opacity: 0;
+  z-index: 1200;
+  transition: opacity 0.3s ease;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Hide filter bar */
+.filter-bar {
+  display: none;
+}
+
+/* Floating elements */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.floating {
+  animation: float 6s ease-in-out infinite;
+}
+
+.floating:nth-child(2n) {
+  animation-delay: -2s;
+}
+
+.floating:nth-child(3n) {
+  animation-delay: -4s;
+}

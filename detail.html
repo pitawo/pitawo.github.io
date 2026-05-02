@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Details - ぴたお@AI🤖 Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="animations.css">
+    <style>
+        .detail-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            padding-top: 120px;
+        }
+        
+        .detail-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .detail-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        
+        .detail-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        
+        .detail-image {
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+        
+        .detail-content {
+            display: grid;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .detail-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        
+        .detail-section h3 {
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .detail-section p, .detail-section li {
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+        
+        .detail-section ul {
+            padding-left: 1.5rem;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .tech-tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .back-button {
+            position: fixed;
+            top: 100px;
+            left: 2rem;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            padding: 1rem;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .back-button:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(0,0,0,0.15);
+        }
+        
+        .back-button svg {
+            width: 24px;
+            height: 24px;
+            fill: #333;
+        }
+        
+        @media (max-width: 768px) {
+            .detail-container {
+                padding: 1rem;
+                padding-top: 100px;
+            }
+            
+            .detail-title {
+                font-size: 2rem;
+            }
+            
+            .back-button {
+                top: 80px;
+                left: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-left">
+                <h1>ぴたお@AI🤖</h1>
+            </div>
+            <div class="nav-right">
+                <ul>
+                    <li><a href="index.html#sectionWorks">PORTFOLIO</a></li>
+                    <li><a href="index.html#about">ABOUT</a></li>
+                    <li><a href="index.html#contact">CONTACT</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <button class="back-button" onclick="history.back()">
+        <svg viewBox="0 0 24 24">
+            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+        </svg>
+    </button>
+
+    <main>
+        <div class="detail-container">
+            <div class="detail-header">
+                <h1 class="detail-title" id="projectTitle">プロジェクト詳細</h1>
+                <p class="detail-subtitle" id="projectSubtitle">プロジェクトの詳細情報</p>
+                <img class="detail-image" id="projectImage" src="" alt="Project Image">
+            </div>
+            
+            <div class="detail-content" id="detailContent">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>THANK YOU FOR VISITING</p>
+        </div>
+    </footer>
+
+    <script>
+        // Project data
+        const projectData = {
+            'dify': {
+                title: 'DIFY AI PLATFORM',
+                subtitle: 'AI Workflow Development',
+                image: 'Image/dify-placeholder.svg',
+                sections: [
+                    {
+                        title: 'プロジェクト概要',
+                        content: 'DifyプラットフォームでAIワークフローの構築を行っています。ノーコード・ローコードでAIエージェントやチャットボットを開発し、業務効率化を実現しています。'
+                    },
+                    {
+                        title: '主な機能・特徴',
+                        content: `
+                            <ul>
+                                <li>カスタムAIエージェントの開発</li>
+                                <li>多様なLLMモデルの統合活用</li>
+                                <li>ワークフロー自動化システム</li>
+                                <li>API連携による外部システム統合</li>
+                                <li>リアルタイムチャットインターフェース</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        title: '技術スタック',
+                        content: '<div class="tech-stack"><span class="tech-tag">Dify Platform</span><span class="tech-tag">OpenAI API</span><span class="tech-tag">Claude API</span><span class="tech-tag">Workflow Automation</span><span class="tech-tag">REST API</span></div>'
+                    },
+                    {
+                        title: '成果・実績',
+                        content: '複数のビジネスプロセスを自動化し、作業時間を平均60%削減。カスタマーサポートの応答時間を大幅に改善し、顧客満足度向上に貢献しました。'
+                    }
+                ]
+            },
+            'streamlit': {
+                title: 'STREAMLIT APPLICATIONS',
+                subtitle: 'Data Analysis & Visualization Tools',
+                image: 'Image/streamlit-placeholder.svg',
+                sections: [
+                    {
+                        title: 'プロジェクト概要',
+                        content: 'Pythonを使用したデータ分析アプリケーションの開発。YouTubeアナリティクス、企業分析ツール、機械学習モデルのデモンストレーションなど、様々なWebアプリケーションを構築しています。'
+                    },
+                    {
+                        title: '主な開発アプリケーション',
+                        content: `
+                            <ul>
+                                <li>YouTubeチャンネル分析ダッシュボード</li>
+                                <li>企業財務データ可視化ツール</li>
+                                <li>機械学習モデル評価システム</li>
+                                <li>リアルタイムデータモニタリング</li>
+                                <li>インタラクティブなデータ探索ツール</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        title: '技術スタック',
+                        content: '<div class="tech-stack"><span class="tech-tag">Python</span><span class="tech-tag">Streamlit</span><span class="tech-tag">Pandas</span><span class="tech-tag">NumPy</span><span class="tech-tag">Plotly</span><span class="tech-tag">Scikit-learn</span><span class="tech-tag">YouTube API</span></div>'
+                    },
+                    {
+                        title: '成果・実績',
+                        content: '複数のデータ分析プロジェクトでビジネスインサイトを提供。特にYouTubeアナリティクスツールでは、コンテンツ制作者の戦略立案を支援し、平均視聴時間の20%向上を実現しました。'
+                    }
+                ]
+            },
+            'midjourney': {
+                title: 'MIDJOURNEY AI ART',
+                subtitle: 'Creative AI Art Generation',
+                image: 'Image/midjourney-placeholder.svg',
+                sections: [
+                    {
+                        title: 'プロジェクト概要',
+                        content: 'Midjourney AIを活用したデジタルアート制作。コンセプトアートから抽象的な表現まで、様々なスタイルのアート作品を生成し、クリエイティブな可能性を探求しています。'
+                    },
+                    {
+                        title: '制作作品・スタイル',
+                        content: `
+                            <ul>
+                                <li>コンセプトアート・キャラクターデザイン</li>
+                                <li>風景画・建築ビジュアライゼーション</li>
+                                <li>抽象アート・アーティスティック表現</li>
+                                <li>ブランディング用ビジュアル素材</li>
+                                <li>イラストレーション・グラフィックデザイン</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        title: '使用技術・手法',
+                        content: '<div class="tech-stack"><span class="tech-tag">Midjourney AI</span><span class="tech-tag">Prompt Engineering</span><span class="tech-tag">Style Transfer</span><span class="tech-tag">Image Composition</span><span class="tech-tag">Digital Art</span></div>'
+                    },
+                    {
+                        title: '成果・実績',
+                        content: '100点以上のオリジナルアート作品を制作。InstagramやTwitterで作品を公開し、クリエイティブコミュニティとの交流を通じてAIアートの可能性を発信しています。'
+                    }
+                ]
+            },
+            'suno': {
+                title: 'SUNO AI MUSIC',
+                subtitle: 'AI Music Generation & Production',
+                image: 'Image/suno-placeholder.svg',
+                sections: [
+                    {
+                        title: 'プロジェクト概要',
+                        content: 'SUNO AIを使用したオリジナル音楽制作。アンビエント、ポップス、エレクトロニカなど様々なジャンルの楽曲を生成し、AIによる音楽制作の新しい可能性を探求しています。'
+                    },
+                    {
+                        title: '制作楽曲・ジャンル',
+                        content: `
+                            <ul>
+                                <li>アンビエント・ヒーリングミュージック</li>
+                                <li>ポップス・コマーシャル楽曲</li>
+                                <li>エレクトロニカ・実験的音楽</li>
+                                <li>ゲーム・映像用BGM</li>
+                                <li>ジングル・効果音制作</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        title: '使用技術・ツール',
+                        content: '<div class="tech-stack"><span class="tech-tag">SUNO AI</span><span class="tech-tag">Music Production</span><span class="tech-tag">Audio Engineering</span><span class="tech-tag">Creative Direction</span><span class="tech-tag">YouTube Publishing</span></div>'
+                    },
+                    {
+                        title: '成果・実績',
+                        content: '50曲以上のオリジナル楽曲を制作し、YouTubeチャンネルで公開。リスナーから高い評価を受け、AI音楽の新しい表現方法を提案しています。'
+                    }
+                ]
+            },
+            'gas': {
+                title: 'GOOGLE APPS SCRIPT',
+                subtitle: 'Workspace Automation & Integration',
+                image: 'Image/gas-placeholder.svg',
+                sections: [
+                    {
+                        title: 'プロジェクト概要',
+                        content: 'Google Apps Scriptを活用した業務自動化システムの開発。Google Workspaceのサービス連携により、効率的なワークフローの構築と運用を行っています。'
+                    },
+                    {
+                        title: '開発システム・機能',
+                        content: `
+                            <ul>
+                                <li>スプレッドシート自動レポート生成</li>
+                                <li>Gmail自動メール配信システム</li>
+                                <li>Googleフォーム回答自動処理</li>
+                                <li>カレンダー連携タスク管理</li>
+                                <li>ドライブファイル自動整理システム</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        title: '技術スタック',
+                        content: '<div class="tech-stack"><span class="tech-tag">Google Apps Script</span><span class="tech-tag">JavaScript</span><span class="tech-tag">Google Workspace API</span><span class="tech-tag">Sheets API</span><span class="tech-tag">Gmail API</span><span class="tech-tag">Drive API</span></div>'
+                    },
+                    {
+                        title: '成果・実績',
+                        content: '複数の組織で業務自動化を実現し、手作業による作業時間を平均70%削減。特にレポート作成業務では、週次レポートの作成時間を5時間から30分に短縮しました。'
+                    }
+                ]
+            }
+        };
+
+        // Get project type from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const projectType = urlParams.get('project') || 'dify';
+
+        // Populate page with project data
+        function loadProjectDetails(type) {
+            const data = projectData[type];
+            if (!data) return;
+
+            document.getElementById('projectTitle').textContent = data.title;
+            document.getElementById('projectSubtitle').textContent = data.subtitle;
+            document.getElementById('projectImage').src = data.image;
+            document.getElementById('projectImage').alt = data.title;
+            document.title = `${data.title} - Portfolio`;
+
+            const contentContainer = document.getElementById('detailContent');
+            contentContainer.innerHTML = '';
+
+            data.sections.forEach(section => {
+                const sectionElement = document.createElement('div');
+                sectionElement.className = 'detail-section';
+                sectionElement.innerHTML = `
+                    <h3>${section.title}</h3>
+                    ${section.content}
+                `;
+                contentContainer.appendChild(sectionElement);
+            });
+        }
+
+        // Load project details on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProjectDetails(projectType);
+        });
+    </script>
+</body>
+</html>

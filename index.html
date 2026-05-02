@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ぴたお@AI🤖 - Portfolio</title>
+    <meta name="description"
+        content="ぴたお@AI🤖 のポートフォリオ。AI ワークフロー開発、データアプリ、クリエイティブ AI プロジェクトの実績集。">
+    <meta property="og:title" content="ぴたお@AI🤖 - Portfolio">
+    <meta property="og:description"
+        content="ぴたお@AI🤖 のポートフォリオ。AI ワークフロー開発、データアプリ、クリエイティブ AI プロジェクトの実績集。">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="https://fav.farm/✨" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="animations.css">
+</head>
+
+<body>
+    <!-- Custom Cursor Elements -->
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+
+    <header>
+        <nav class="navbar">
+            <div class="nav-left">
+                <!-- Hamburger Button -->
+                <button class="hamburger" aria-label="Menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <h1>ぴたお@AI🤖</h1>
+            </div>
+            <div class="nav-right">
+                <ul>
+                    <li><a href="#sectionWorks">PORTFOLIO</a></li>
+                    <li><a href="#about">ABOUT</a></li>
+                    <li><a href="#contact">CONTACT</a></li>
+                </ul>
+            </div>
+            <!-- Mobile Menu Overlay -->
+            <div class="mobile-menu">
+                <nav class="mobile-nav">
+                    <ul>
+                        <li><a href="#sectionWorks" class="mobile-link">PORTFOLIO</a></li>
+                        <li><a href="#about" class="mobile-link">ABOUT</a></li>
+                        <li><a href="#contact" class="mobile-link">CONTACT</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="animated-background">
+                <div class="floating-shapes">
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                    <div class="shape shape-3"></div>
+                    <div class="shape shape-4"></div>
+                    <div class="shape shape-5"></div>
+                    <div class="shape shape-6"></div>
+                </div>
+                <div class="particles">
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                </div>
+            </div>
+            <div class="hero-content">
+                <h2>WELCOME</h2>
+            </div>
+            <div class="scroll-down">SCROLL</div>
+        </section>
+
+        <section id="sectionWorks">
+            <div class="container">
+                <h2 class="section-title">PORTFOLIO</h2>
+
+                <div class="works-grid">
+                    <!-- Dify Projects -->
+                    <a href="dify-detail.html" class="work-card dify-project">
+                        <div class="work-image">
+                            <img src="Image/dify-placeholder.svg" alt="Dify AI Platform">
+                        </div>
+                        <div class="work-info">
+                            <h3>DIFY AI PLATFORM</h3>
+                            <p class="work-type">AI Workflow</p>
+                            <p class="work-description">AIワークフローの構築と自動化プラットフォーム。チャットボットやAIエージェントを直感的に作成できます。</p>
+                        </div>
+                    </a>
+
+                    <!-- Streamlit Projects -->
+                    <a href="streamlit-detail.html" class="work-card streamlit-project">
+                        <div class="work-image">
+                            <img src="Image/streamlit-placeholder.svg" alt="Streamlit App">
+                        </div>
+                        <div class="work-info">
+                            <h3>STREAMLIT APPS</h3>
+                            <p class="work-type">Data Applications</p>
+                            <p class="work-description">Pythonでデータ分析アプリケーションを構築。YouTubeリサーチや企業分析ツールなど。</p>
+                        </div>
+                    </a>
+
+                    <!-- Midjourney Projects -->
+                    <a href="midjourney-detail.html" class="work-card midjourney-project">
+                        <div class="work-image">
+                            <img src="Image/midjourney-placeholder.svg" alt="Midjourney AI Art">
+                        </div>
+                        <div class="work-info">
+                            <h3>MIDJOURNEY ART</h3>
+                            <p class="work-type">AI Generated Art</p>
+                            <p class="work-description">AIを活用したデジタルアート作品。コンセプトアートやアーティスティックな表現を探求。</p>
+                        </div>
+                    </a>
+
+                    <!-- SUNO AI Projects -->
+                    <a href="suno-detail.html" class="work-card suno-project">
+                        <div class="work-image">
+                            <img src="Image/suno-placeholder.svg" alt="SUNO AI Music">
+                        </div>
+                        <div class="work-info">
+                            <h3>SUNO AI MUSIC</h3>
+                            <p class="work-type">AI Generated Music</p>
+                            <p class="work-description">AIで生成したオリジナル音楽作品。アンビエントからポップスまで様々なジャンルを制作。</p>
+                        </div>
+                    </a>
+
+                    <!-- Google Apps Script Projects -->
+                    <a href="gas-detail.html" class="work-card gas-project">
+                        <div class="work-image">
+                            <img src="Image/gas-placeholder.svg" alt="Google Apps Script">
+                        </div>
+                        <div class="work-info">
+                            <h3>GOOGLE APPS SCRIPT</h3>
+                            <p class="work-type">Automation & Integration</p>
+                            <p class="work-description">Google WorkspaceのAPIを活用した業務自動化システム。スプレッドシート連携や自動レポート生成など。</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title">ABOUT</h2>
+                <div class="about-content">
+                    <div class="profile-image reveal-left">
+                        <img src="Image/profile-photo.svg" alt="ぴたお@AI🤖" class="profile-photo">
+                    </div>
+                    <div class="profile-section reveal-right">
+                        <h3>PROFILE</h3>
+                        <p>ぴたお@AI🤖。AI を活用した業務効率化とクリエイティブ開発に取り組んでいます。</p>
+                        <p>Dify でのワークフロー自動化、Streamlit でのデータ分析アプリ、Midjourney での AI アート、SUNO AI での音楽生成、Google Apps Script での業務自動化など、AI 技術を生活と仕事に組み込みながら作品作りを続けています。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2 class="section-title">CONTACT</h2>
+                <p class="contact-lead">お問い合わせは X（旧 Twitter）の DM か note までお気軽にどうぞ。</p>
+                <div class="contact-icons">
+                    <a href="https://x.com/pitawo0822" target="_blank" rel="noopener" class="contact-icon x-icon"
+                        title="X (@pitawo0822)">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg>
+                    </a>
+
+                    <a href="https://note.com/pitawo" target="_blank" rel="noopener" class="contact-icon note-icon"
+                        title="note (ぴたお@AI🤖)">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M5 4h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm2 4v8h2.4l4.2-5.4V16H16V8h-2.4l-4.2 5.4V8H7z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>THANK YOU FOR VISITING</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
