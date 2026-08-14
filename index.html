@@ -6,162 +6,124 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ぴたお@AI🤖 - Portfolio</title>
     <meta name="description"
-        content="ぴたお@AI🤖 のポートフォリオ。毎日 AI に触れている個人として、企画して作ったものと、その過程を記録しています。">
+        content="ぴたお@AI🤖 のポートフォリオ。毎日 AI に触れている個人として、作ったものと、その過程を記録しています。">
     <meta property="og:title" content="ぴたお@AI🤖 - Portfolio">
     <meta property="og:description"
-        content="ぴたお@AI🤖 のポートフォリオ。毎日 AI に触れている個人として、企画して作ったものと、その過程を記録しています。">
+        content="ぴたお@AI🤖 のポートフォリオ。毎日 AI に触れている個人として、作ったものと、その過程を記録しています。">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="https://fav.farm/✨" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="animations.css">
 </head>
 
 <body>
-    <!-- Custom Cursor Elements -->
-    <div class="cursor-dot" data-cursor-dot></div>
-    <div class="cursor-outline" data-cursor-outline></div>
-
     <header>
         <nav class="navbar">
-            <div class="nav-left">
-                <!-- Hamburger Button -->
-                <button class="hamburger" aria-label="Menu">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </button>
-                <h1>ぴたお@AI🤖</h1>
-            </div>
-            <div class="nav-right">
-                <ul>
-                    <li><a href="#sectionWorks">PORTFOLIO</a></li>
-                    <li><a href="#about">ABOUT</a></li>
-                    <li><a href="#contact">CONTACT</a></li>
-                </ul>
-            </div>
-            <!-- Mobile Menu Overlay -->
-            <div class="mobile-menu">
-                <nav class="mobile-nav">
-                    <ul>
-                        <li><a href="#sectionWorks" class="mobile-link">PORTFOLIO</a></li>
-                        <li><a href="#about" class="mobile-link">ABOUT</a></li>
-                        <li><a href="#contact" class="mobile-link">CONTACT</a></li>
-                    </ul>
-                </nav>
-            </div>
+            <a href="/" class="wordmark">ぴたお@AI🤖</a>
+            <ul class="nav-links">
+                <li><a href="#works">作ったもの</a></li>
+                <li><a href="#about">この人について</a></li>
+                <li><a href="#contact">連絡先</a></li>
+            </ul>
         </nav>
     </header>
 
     <main>
         <section id="hero">
-            <div class="animated-background">
-                <div class="floating-shapes">
-                    <div class="shape shape-1"></div>
-                    <div class="shape shape-2"></div>
-                    <div class="shape shape-3"></div>
-                    <div class="shape shape-4"></div>
-                    <div class="shape shape-5"></div>
-                    <div class="shape shape-6"></div>
-                </div>
-                <div class="particles">
-                    <div class="particle"></div>
-                    <div class="particle"></div>
-                    <div class="particle"></div>
-                    <div class="particle"></div>
-                    <div class="particle"></div>
-                    <div class="particle"></div>
-                    <div class="particle"></div>
-                    <div class="particle"></div>
-                    <div class="particle"></div>
-                    <div class="particle"></div>
-                </div>
+            <div class="container">
+                <p class="eyebrow">毎日 AI に触れている個人</p>
+                <h1>作ったものと、<br>詰まった過程を置いています。</h1>
+                <p class="lead">Claude Code・ChatGPT・Gemini を毎日横断して使いながら、思いついたものを実際に作っています。完成品だけでなく、なぜ作ったのか、どこで詰まったのか、どう直したのかまで残しています。</p>
             </div>
-            <div class="hero-content">
-                <h2>WELCOME</h2>
-            </div>
-            <div class="scroll-down">SCROLL</div>
         </section>
 
-        <section id="sectionWorks">
+        <section id="works">
             <div class="container">
-                <h2 class="section-title">PORTFOLIO</h2>
+                <p class="eyebrow">— WORKS</p>
+                <h2 class="section-title">作ったもの</h2>
 
                 <!-- 実績は source/works/*.md から生成される。HTML を直接編集しない -->
-                <div class="works-grid">
-                    <a href="works/secretary-app.html" class="work-card">
-                        <div class="work-image">
-                            <img src="Image/works/secretary-app.svg" alt="自分専用の秘書アプリの画面イメージ">
-                        </div>
-                        <div class="work-info">
-                            <h3>自分専用の秘書アプリ</h3>
-                            <p class="work-type">Web App</p>
-                            <p class="work-description">メモ・タスク・週次の振り返りを1画面で扱う自分用ツール。外部ライブラリを使わず Node.js の標準機能だけで作った。</p>
-                        </div>
-                    </a>
-                </div>
+                <ul class="works-list">
+                    <li class="work-item">
+                        <a href="works/secretary-app.html" class="work-link">
+                            <div class="work-thumb">
+                                <img src="Image/works/secretary-app.svg" alt="自分専用の秘書アプリの画面イメージ">
+                            </div>
+                            <div class="work-body">
+                                <div class="work-head">
+                                    <h3>自分専用の秘書アプリ</h3>
+                                    <span class="work-date">2026-08</span>
+                                </div>
+                                <p class="work-desc">メモ・タスク・週次の振り返りを1画面で扱う自分用ツール。外部ライブラリを使わず Node.js の標準機能だけで作った。</p>
+                                <ul class="tags">
+                                    <li class="tag">Node.js</li>
+                                    <li class="tag">HTML / CSS / JavaScript</li>
+                                    <li class="tag">Claude Code</li>
+                                </ul>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </section>
 
         <section id="about">
             <div class="container">
-                <h2 class="section-title">ABOUT</h2>
-                <div class="about-content">
-                    <div class="profile-image reveal-left">
-                        <img src="Image/profile-photo.svg" alt="ぴたお@AI🤖" class="profile-photo">
-                    </div>
-                    <div class="profile-section reveal-right">
-                        <h3>PROFILE</h3>
-                        <p>ぴたお@AI🤖。Claude Code・ChatGPT・Gemini を毎日横断して使いながら、思いついたものを実際に作っています。</p>
-                        <p>完成品だけを置く場所にはしていません。なぜ作ったのか、どこで詰まったのか、どう直したのかまで残しています。情報は複製できても、実際に詰まった過程は複製できないと考えているからです。</p>
-                    </div>
+                <p class="eyebrow">— ABOUT</p>
+                <h2 class="section-title">この人について</h2>
+                <div class="prose">
+                    <p>ぴたお@AI🤖。Claude Code・ChatGPT・Gemini を毎日横断して使っています。単一のツールに寄らず、何がどれに向いているかを実際に使って確かめるのが習慣です。</p>
+                    <p>ここは完成品だけを置く場所にはしていません。なぜ作ったのか、どこで詰まったのか、どう直したのかまで残しています。情報は複製できても、実際に詰まった過程は複製できないと考えているからです。</p>
                 </div>
             </div>
         </section>
 
         <section id="contact">
             <div class="container">
-                <h2 class="section-title">CONTACT</h2>
-                <p class="contact-lead">お問い合わせは X（旧 Twitter）の DM か note までお気軽にどうぞ。</p>
-                <div class="contact-icons">
-                    <a href="https://x.com/pitawo0822" target="_blank" rel="noopener" class="contact-icon x-icon"
-                        title="X (@pitawo0822)">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                        </svg>
-                    </a>
-
-                    <a href="https://note.com/pitawo" target="_blank" rel="noopener" class="contact-icon note-icon"
-                        title="note (ぴたお@AI🤖)">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M5 4h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm2 4v8h2.4l4.2-5.4V16H16V8h-2.4l-4.2 5.4V8H7z" />
-                        </svg>
-                    </a>
-
-                    <a href="https://github.com/pitawo" target="_blank" rel="noopener" class="contact-icon github-icon"
-                        title="GitHub (pitawo)">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-                        </svg>
-                    </a>
-                </div>
+                <p class="eyebrow">— CONTACT</p>
+                <h2 class="section-title">連絡先</h2>
+                <p class="prose">お問い合わせは X の DM か note までどうぞ。</p>
+                <ul class="links">
+                    <li>
+                        <a href="https://x.com/pitawo0822" target="_blank" rel="noopener">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                            </svg>
+                            <span>X</span>
+                            <span class="link-id">@pitawo0822</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://note.com/pitawo" target="_blank" rel="noopener">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M5 4h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm2 4v8h2.4l4.2-5.4V16H16V8h-2.4l-4.2 5.4V8H7z" />
+                            </svg>
+                            <span>note</span>
+                            <span class="link-id">ぴたお@AI🤖</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/pitawo" target="_blank" rel="noopener">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                            </svg>
+                            <span>GitHub</span>
+                            <span class="link-id">pitawo</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </section>
     </main>
 
     <footer>
         <div class="container">
-            <p>THANK YOU FOR VISITING</p>
+            <p>ぴたお@AI🤖</p>
         </div>
     </footer>
-
-    <script src="app.js"></script>
 </body>
 
 </html>
