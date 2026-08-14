@@ -193,34 +193,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 1500);
   }
 
-  /* 9) Optional: simple category filter (works with future cards)
-         Add classes like: .dify-project, .streamlit-project, .midjourney-project, .suno-project to .work-card
-  */
-  const worksContainer = document.querySelector('#sectionWorks .container');
-  const grid = document.querySelector('.works-grid');
-  if (worksContainer && grid) {
-    const bar = document.createElement('div');
-    bar.className = 'filter-bar';
-    bar.innerHTML = `
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="dify-project">Dify</button>
-      <button class="filter-btn" data-filter="streamlit-project">Streamlit</button>
-      <button class="filter-btn" data-filter="midjourney-project">Midjourney</button>
-      <button class="filter-btn" data-filter="suno-project">Suno</button>
-      <button class="filter-btn" data-filter="gas-project">GAS</button>
-    `;
-    worksContainer.insertBefore(bar, grid);
-    bar.addEventListener('click', (e) => {
-      const btn = e.target.closest('.filter-btn');
-      if (!btn) return;
-      bar.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b === btn));
-      const key = btn.dataset.filter;
-      document.querySelectorAll('.works-grid .work-card').forEach(card => {
-        const show = key === 'all' || card.classList.contains(key);
-        card.classList.toggle('hidden', !show);
-      });
-    });
-  }
+  /* 9) カテゴリフィルタは削除（2026-08-14）
+        5ジャンル（Dify/Streamlit/Midjourney/Suno/GAS）がハードコードされていたが、
+        実績は source/works/*.md から生成する方式に変わったため対応しない。
+        実績が増えて絞り込みが必要になった時点で、カテゴリを source から生成して作り直す。 */
 
   /* Respect reduce motion */
   const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
