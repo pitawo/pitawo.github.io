@@ -165,8 +165,18 @@ section {
 /* ---------- hero ---------- */
 
 #hero {
+    position: relative;
     padding-top: 7rem;
     padding-bottom: 7rem;
+    /* 線画は右下に集まり左上が空いている。文字は左に置くので右へ寄せる */
+    background-image: url("Image/hero-bg.webp");
+    background-repeat: no-repeat;
+    background-position: right -40px bottom 0;
+    background-size: 72% auto;
+}
+
+#hero .container {
+    position: relative;
 }
 
 #hero h1 {
@@ -565,6 +575,9 @@ code {
     #hero {
         padding-top: 4.5rem;
         padding-bottom: 4.5rem;
+        /* 幅が狭いと文字と線が重なるので、右下の隅だけに寄せる */
+        background-size: 150% auto;
+        background-position: right -55% bottom -10px;
     }
 
     .work-link {
