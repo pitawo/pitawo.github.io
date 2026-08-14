@@ -551,7 +551,8 @@ body.hovering .cursor-outline {
 
 .works-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* auto-fill: 実績が1件でもカードが画面幅いっぱいに間延びしない */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 3rem;
     margin-top: 3rem;
 }
