@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-labelledby="t">
+  <title id="t">Google ログインと進捗管理を備えた動画講座配信サイトの画面イメージ</title>
+
+  <rect width="800" height="500" fill="#fafafb"/>
+
+  <!-- window -->
+  <rect x="40.5" y="40.5" width="719" height="419" rx="4" fill="#ffffff" stroke="#ebebef"/>
+  <line x1="40.5" y1="80.5" x2="759.5" y2="80.5" stroke="#ebebef"/>
+  <circle cx="62" cy="60" r="3.5" fill="#d8d8e0"/>
+  <circle cx="76" cy="60" r="3.5" fill="#d8d8e0"/>
+  <circle cx="90" cy="60" r="3.5" fill="#d8d8e0"/>
+
+  <!-- nav -->
+  <rect x="112" y="55" width="70" height="10" rx="2" fill="#2a2a33"/>
+  <rect x="676" y="53" width="60" height="14" rx="3" fill="#667eea"/>
+
+  <!-- hero heading -->
+  <rect x="72.5" y="108" width="300" height="14" rx="2" fill="#2a2a33"/>
+  <rect x="72.5" y="130" width="220" height="14" rx="2" fill="#2a2a33"/>
+  <rect x="72.5" y="156" width="260" height="8" rx="2" fill="#9a9aa6"/>
+
+  <!-- course card -->
+  <rect x="72.5" y="196.5" width="655" height="112" rx="4" fill="#ffffff" stroke="#ebebef"/>
+  <rect x="88" y="212" width="140" height="80" rx="4" fill="#f2f3fd"/>
+  <rect x="248" y="220" width="220" height="10" rx="2" fill="#2a2a33"/>
+  <rect x="248" y="240" width="340" height="7" rx="2" fill="#9a9aa6"/>
+  <rect x="248" y="256" width="300" height="7" rx="2" fill="#9a9aa6"/>
+  <rect x="248" y="276" width="70" height="16" rx="3" fill="#f2f3fd"/>
+  <rect x="328" y="276" width="70" height="16" rx="3" fill="#f2f3fd"/>
+  <rect x="628" y="276" width="80" height="20" rx="3" fill="#667eea"/>
+
+  <!-- lesson list -->
+  <rect x="72.5" y="332.5" width="655" height="112" rx="4" fill="#ffffff" stroke="#ebebef"/>
+  <rect x="90" y="350" width="90" height="8" rx="2" fill="#9a9aa6"/>
+  <line x1="72.5" y1="372.5" x2="727.5" y2="372.5" stroke="#ebebef"/>
+
+  <g>
+    <circle cx="97" cy="393" r="7" fill="#667eea"/>
+    <path d="M93.5 393l2.5 2.5 5-5" stroke="#ffffff" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="118" y="389" width="220" height="8" rx="2" fill="#666672"/>
+  </g>
+
+  <line x1="72.5" y1="412.5" x2="727.5" y2="412.5" stroke="#ebebef"/>
+
+  <g>
+    <circle cx="97" cy="429" r="7" fill="#ffffff" stroke="#d8d8e0"/>
+    <rect x="118" y="425" width="180" height="8" rx="2" fill="#9a9aa6"/>
+  </g>
+</svg>
