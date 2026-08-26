@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>動画講座配信プラットフォーム | ぴたお@AI🤖</title>
+    <meta name="description" content="Google ログインとレッスン単位の進捗管理を備えた、動画講座を配信するための自作プラットフォーム。設定の読み込み順や状態管理でつまずいた制作記録。">
+    <meta property="og:title" content="動画講座配信プラットフォーム | ぴたお@AI🤖">
+    <meta property="og:description" content="Google ログインとレッスン単位の進捗管理を備えた、動画講座を配信するための自作プラットフォーム。設定の読み込み順や状態管理でつまずいた制作記録。">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="https://fav.farm/✨" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="../index.html" class="wordmark">ぴたお@AI🤖</a>
+            <ul class="nav-links">
+                <li><a href="../index.html#works">WORKS</a></li>
+                <li><a href="../index.html#about">ABOUT</a></li>
+                <li><a href="../index.html#contact">CONTACT</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="detail-hero">
+            <div class="container">
+                <h1>動画講座配信プラットフォーム</h1>
+                <p class="detail-meta">
+                    <span>2026-08</span>
+                    <span>Next.js / Drizzle ORM / Better Auth</span>
+                    <span>Claude Code</span>
+                </p>
+                <figure class="detail-figure">
+                    <img src="../Image/works/course-platform.svg" alt="Google ログインと進捗管理を備えた動画講座配信サイトの画面イメージ">
+                </figure>
+            </div>
+        </section>
+
+        <article class="detail">
+            <div class="container">
+
+                <h2>なぜ作ったか</h2>
+                <p>以前作った秘書アプリは、ブラウザとローカルのサーバーだけで完結する個人用ツールでした。次は、ログイン・データベース・本番デプロイまで含めて、誰かがブラウザから触れる形のアプリを一人で作りきることを目標にしました。</p>
+                <p>題材には、自分が G検定の学習でまとめていた「AI の歴史」を選びました。人工知能の定義から、ブームと冬の時代が繰り返されてきた流れまでを、レッスン単位で並べて見返せる形にしています。</p>
+
+                <h2>どう作ったか</h2>
+                <p>構成は Next.js（フロントエンドと API）・Drizzle ORM・Turso（本番データベース）・Better Auth（メール＋パスワードと Google ログイン）・Vercel Blob（サムネイル画像）です。開発中はローカルの SQLite に向けて作り、公開の直前に接続先を本番のデータベースへ切り替えました。</p>
+                <p>Claude Code に要件と技術構成を渡して実装させ、動かして気づいた点を戻す進め方は前作と同じです。今回は自動テストも合わせて書かせ、コードを直すたびにテストと型チェックを通してから次に進めました。</p>
+
+                <h2>詰まった点と、直したこと</h2>
+                <p>このアプリで一番危なかったのは、機能の作り込みではなく<strong>見えている情報と実際の動きがずれる</strong>問題でした。</p>
+
+                <div class="issues">
+                    <div class="issue">
+                        <h3>設定を読み込む順番で、書き込み先がずれていた</h3>
+                        <p>データを流し込むスクリプトが「本番データベースに書き込みました」とログに出すのに、実際にはローカルのファイルに書き込まれている状態が起きていました。原因は、設定を読み込む処理より先に、データベースへの接続処理が実行されていたことです。ログが参照している場所と、接続が実際に見ている場所がずれていました。</p>
+                        <p>設定を読み込む処理を一番最初に置き直し、接続先は「たぶんこの値のはず」ではなく、実際に接続したモジュール自身に報告させる形に変えました。</p>
+                    </div>
+
+                    <div class="issue">
+                        <h3>レッスンを切り替えても「完了」ボタンの状態が前のまま残った</h3>
+                        <p>動画とタイトルは切り替わるのに、完了ボタンだけ前のレッスンの状態を表示し続ける不具合がありました。原因は、レッスンを切り替えても表示コンポーネント自体は再利用され続け、内部で持っている状態が初期化されないことでした。</p>
+                        <p>レッスンが切り替わるたびにコンポーネントごと作り直す指定を加えて直しました。</p>
+                    </div>
+
+                    <div class="issue">
+                        <h3>新規登録に、管理者権限を混ぜ込める穴があった</h3>
+                        <p>新規登録の API に渡すデータへ、本来は使わないはずの「権限」の項目を混ぜて送ると、誰でも管理者として登録できてしまう状態でした。動作確認では気づきにくく、リクエストの中身まで見て初めて分かる種類の問題でした。</p>
+                        <p>権限の項目は登録時に外部から書き込めないよう固定し、内部処理だけが変更できる形にしました。</p>
+                    </div>
+                </div>
+
+                <h2>ここから学んだこと</h2>
+                <p><strong>「動いて見える」と「本当にその通り動いている」は別でした。</strong>ログに出ている情報や画面の表示は、実際の状態とずれることがあります。前作で学んだ「壊れるところを考えるのは使う側の仕事」に加えて、今回は表示されている情報をそのまま信じないという点も学びました。</p>
+
+                <h2>公開について</h2>
+                <p>本番で公開中です。ログインしなくても講座一覧とレッスンの内容は見られ、Google ログインで受講と進捗の記録ができます。</p>
+                <p><strong>現状、レッスン動画は10本中1本のみ公開済みで、残り9本は制作中です。</strong>音声つきの解説動画は、資料を読み込ませると音声解説付きの動画にしてくれる NotebookLM で作っています。動画ができ次第、管理画面から順に差し替えていきます。</p>
+
+                <div class="detail-foot">
+                    <a href="https://my-own-video-platform-lime-tau.vercel.app" target="_blank" rel="noopener"
+                        class="button button-primary">サイトを見る</a>
+                    <a href="../index.html#works" class="back-link">← WORKS 一覧へ</a>
+                </div>
+
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>ぴたお@AI🤖</p>
+        </div>
+    </footer>
+</body>
+
+</html>
