@@ -409,6 +409,14 @@ footer p {
     height: auto;
 }
 
+.detail-figure figcaption {
+    padding: 0.6rem 0.9rem;
+    border-top: 1px solid var(--line);
+    background-color: var(--bg);
+    color: var(--muted);
+    font-size: 0.78rem;
+}
+
 article.detail {
     padding: 3.5rem 0 5rem;
 }
