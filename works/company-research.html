@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企業リサーチシステム | ぴたお@AI🤖</title>
+    <meta name="description" content="上場企業の財務データを取得して可視化するツール。画面が動いていても、数字が正しいとは限らないと分かった制作記録。">
+    <meta property="og:title" content="企業リサーチシステム | ぴたお@AI🤖">
+    <meta property="og:description" content="上場企業の財務データを取得して可視化するツール。画面が動いていても、数字が正しいとは限らないと分かった制作記録。">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="https://fav.farm/✨" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="../index.html" class="wordmark">ぴたお@AI🤖</a>
+            <ul class="nav-links">
+                <li><a href="../index.html#works">WORKS</a></li>
+                <li><a href="../index.html#about">ABOUT</a></li>
+                <li><a href="../index.html#contact">CONTACT</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="detail-hero">
+            <div class="container">
+                <h1>企業リサーチシステム</h1>
+                <p class="detail-meta">
+                    <span>2026-08</span>
+                    <span>Python / Streamlit</span>
+                    <span>yfinance / Plotly</span>
+                    <span>Claude Code</span>
+                </p>
+                <figure class="detail-figure">
+                    <img src="../Image/works/company-research.svg" alt="財務指標のカードと業績の折れ線グラフ、注記が並んだ画面のイメージ">
+                </figure>
+            </div>
+        </section>
+
+        <article class="detail">
+            <div class="container">
+
+                <h2>なぜ作ったか</h2>
+                <p>企業の財務を調べるとき、いちばん時間がかかるのは分析ではなく<strong>数字を集めるところ</strong>でした。証券コードを入れれば直近数期の損益・貸借対照表・キャッシュフローと主要な指標が並ぶ状態にしたかったので作りました。</p>
+                <p>このツールは以前に作って手元に置いていたものを、公開にあたって直したものです。元のコードは証券コードから数値をその場で生成しているだけで、実データを取りに行く処理は1行も書かれていませんでした。</p>
+
+                <h2>どう作ったか</h2>
+                <p>データは Yahoo! Finance から <code>yfinance</code> 経由で取得します。5社分のスナップショットを同梱してあるので、キーの設定なしで初回から動きます。収録外の企業は証券コードを入れるとその場で取得します。</p>
+                <p>画面は「企業概要」と「財務分析」の2つ。取得層と分析・表示を分けてあるので、データ元を別のものに替えても画面はそのまま使えます。</p>
+                <p><strong>このツールで一番手を入れたのは、グラフでも指標でもなく、取得した数字をそのまま出さないための検証でした。</strong>公開データを並べるだけだと、事実ではあるが誤解を招く数字が混ざります。</p>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>検証していること</th>
+                                <th>実際に引っかかった例</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>非継続事業の影響</td>
+                                <td>ある会社の直近期は最終利益がマイナス3,268億円。ただし事業分離を除いた継続事業ベースではプラス1兆308億円。稼ぐ力を見る指標としては後者が適切なので、そちらを使って乖離を注記する</td>
+                            </tr>
+                            <tr>
+                                <td>貸借対照表の構造変化</td>
+                                <td>総資産が1年で56%減った期がある。事業の分離や会計基準の変更が混ざると自己資本比率の推移を単純比較できないので、前期比 ±30% を超えた期に注記を出す</td>
+                            </tr>
+                            <tr>
+                                <td>決算期の飛び</td>
+                                <td>決算期を変更した会社で、変則決算の期が取得元のデータに入っていない。そのまま折れ線にすると連続して見えるため、25か月の飛びを検出して注記する</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2>詰まった点と、直したこと</h2>
+                <p><strong>このツールで一番の山場は、機能の不具合ではなく、画面はどれも正常に描画されているのに、裏側の数字だけが壊れていたことでした。</strong></p>
+
+                <div class="issues">
+                    <div class="issue">
+                        <h3>画面はできていたのに、数字が本物ではなかった</h3>
+                        <p>引き継いだ状態のコードは、証券コードから<strong>その場で数値を生成して</strong>表示していました。実在する企業名の横に、実在しない財務数値が並ぶ状態です。</p>
+                        <p>調べると、これは中身をごまかしていたのではなく<strong>作りかけ</strong>でした。設定ファイルには取得先の URL も再試行の回数も書いてあり、キャッシュの仕組みも完成しています。ただ、外部にデータを取りに行く処理が1か所も書かれていませんでした。画面を先に作り、データ取得を後で差し込む設計で、後半に手を付けないまま止まっていたわけです。</p>
+                        <p>差し替えが必要だったのは、画面が呼んでいる3つの関数だけでした。画面のコードはそのまま生かして、取得層を実装しました。</p>
+                    </div>
+
+                    <div class="issue">
+                        <h3>営業利益が、開示されている数字とずれていた</h3>
+                        <p>取得元には営業利益にあたる項目が2種類あります。<strong>片方は取得元が独自に調整した数値</strong>で、企業が実際に開示している値とは一致しません。最初はこちらを使っていました。</p>
+                        <p>企業が開示している値を別のデータベースで確認して突き合わせたところ、一致するのはもう一方でした。</p>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>開示値</th>
+                                        <th>採用した項目</th>
+                                        <th>使っていた項目</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>会社 A</td>
+                                        <td>1兆7,062億円</td>
+                                        <td>1,706,221</td>
+                                        <td>1,786,410</td>
+                                    </tr>
+                                    <tr>
+                                        <td>会社 B</td>
+                                        <td>1,139億円</td>
+                                        <td>113,968</td>
+                                        <td>107,656</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>単位は百万円。同梱している5社・直近4〜5期の全 17 件で見ると、<strong>乖離は最大 7.3%</strong>でした。率としては小さく見えますが、金額の桁が大きいので会社 A では800億円以上の差になります。</p>
+                    </div>
+
+                    <div class="issue">
+                        <h3>銀行を入れると落ちた</h3>
+                        <p><strong>ライブ取得の機能を自分で足したのに、同梱している5社でしか試していませんでした。</strong>銀行の証券コードを入れると、そのまま処理が落ちます。</p>
+                        <p>銀行や保険は貸借対照表に流動／固定の区分を持ちません。流動比率などがそもそも計算できないので、必要な項目が揃っているかを取得の時点で調べ、揃わない企業は理由を添えて断るようにしました。</p>
+                    </div>
+
+                    <div class="issue">
+                        <h3>本番で開いたら、成長率が100倍で表示されていた</h3>
+                        <p>手元のテストは24件すべて通っていました。公開して自分で開いたら、売上の年平均成長率が <strong>+437.8%</strong> と出ていました。正しくは +4.4%。パーセントに直す処理が2か所に入っていたためです。</p>
+                        <p>これは表示だけの問題では済みませんでした。<strong>成長を評価する処理も、100倍された値を受け取っていました。</strong>成長スコアが常に上限に張り付き、総合スコアも実態より高く出ていました（ある会社で 92.4 から 74.1 へ修正）。手元のテストは「エラーが出ないこと」しか見ていなかったので素通りしていました。</p>
+                    </div>
+                </div>
+
+                <h2>ここから学んだこと</h2>
+                <p><strong>画面が動いていることは、そこに出ている数字が正しいことを何も保証しません。</strong>このツールでは3段階でそれを踏みました。数字が生成されたものだったこと、項目の取り違えで数%ずれていたこと、単位が100倍ずれていたこと。どれも画面は正常に描画されていました。</p>
+                <p>もう1つは、<strong>やらないことを決めるほうが効いた</strong>という点です。決めたのは、投資判定を出さないこと、出典を示せない業界平均と比較しないこと、取得できない項目を仮定の係数で埋めないこと、取れなかった数字を 0 で埋めないことでした。指標をいくつか削ることになりましたが、残った数字はどこから来たか説明できます。</p>
+
+                <h2>公開について</h2>
+                <p>Streamlit Cloud で公開中です。同梱データがあるので設定なしで動きます。数値が有価証券報告書と完全に一致することは保証しておらず、投資判断には使えない旨を画面にも書いています。</p>
+                <p>Streamlit Cloud の<strong>無料枠</strong>で動かしているので、しばらくアクセスがないとアプリがスリープします。その場合は起動を促す画面が先に出ますので、ボタンを押してから立ち上がるまで、数分かかることがあります。</p>
+
+                <div class="detail-foot">
+                    <a href="https://pitawo-company-research.streamlit.app/" target="_blank" rel="noopener"
+                        class="button button-primary">アプリを開く</a>
+                    <a href="https://github.com/pitawo/company-research-tool" target="_blank" rel="noopener"
+                        class="button">GitHub で見る</a>
+                    <a href="../index.html#works" class="back-link">← WORKS 一覧へ</a>
+                </div>
+
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>ぴたお@AI🤖</p>
+        </div>
+    </footer>
+</body>
+
+</html>

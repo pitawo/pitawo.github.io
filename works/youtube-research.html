@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube リサーチシステム | ぴたお@AI🤖</title>
+    <meta name="description" content="URL を貼るだけで動画とチャンネルの数字を並べて見られるツール。公開用に変えるとき、いちばん手を入れたのは「数字の出どころ」だった話。">
+    <meta property="og:title" content="YouTube リサーチシステム | ぴたお@AI🤖">
+    <meta property="og:description" content="URL を貼るだけで動画とチャンネルの数字を並べて見られるツール。公開用に変えるとき、いちばん手を入れたのは「数字の出どころ」だった話。">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="https://fav.farm/✨" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="../index.html" class="wordmark">ぴたお@AI🤖</a>
+            <ul class="nav-links">
+                <li><a href="../index.html#works">WORKS</a></li>
+                <li><a href="../index.html#about">ABOUT</a></li>
+                <li><a href="../index.html#contact">CONTACT</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="detail-hero">
+            <div class="container">
+                <h1>YouTube リサーチシステム</h1>
+                <p class="detail-meta">
+                    <span>2026-08</span>
+                    <span>Python / Streamlit</span>
+                    <span>YouTube Data API v3 / SQLite</span>
+                    <span>Claude Code</span>
+                </p>
+                <figure class="detail-figure">
+                    <img src="../Image/works/youtube-research.svg" alt="URL 入力欄の下に再生回数などの統計カードとグラフが並んだ画面のイメージ">
+                </figure>
+            </div>
+        </section>
+
+        <article class="detail">
+            <div class="container">
+
+                <h2>なぜ作ったか</h2>
+                <p>動画を分析しようとすると、<strong>再生回数だけ見ても、その数字が多いのか少ないのかが分かりません。</strong>チャンネルの規模に対してどうなのか、同じチャンネルの他の動画と比べてどうなのかを、そのつど手で数えていました。</p>
+                <p>URL を貼れば必要な数字が並ぶ状態にしたかったので、YouTube Data API v3 を叩く画面を作りました。</p>
+
+                <h2>どう作ったか</h2>
+                <p>動画の分析（再生回数・高評価・コメント・エンゲージメント率）と、チャンネルの分析（登録者・投稿頻度・直近動画の一覧）の2本立てです。結果は CSV と JSON で書き出せます。</p>
+                <p>技術的に決めたことが2つあります。</p>
+
+                <h3>API キーを自分のものにしない</h3>
+                <p>キーは画面のサイドバーから入力する方式にしました。自分のキーを公開アプリに埋めると、<strong>他人が使った分まで自分の利用枠から引かれます。</strong>訪問者は自分のキーを入れて使います。</p>
+
+                <h3>同じ問い合わせを繰り返さない</h3>
+                <p>取得した結果は SQLite に貯めて、同じ URL なら再利用します。API の利用枠は1日あたりで決まっているので、これがないとすぐ上限に当たります。</p>
+
+                <h2>詰まった点と、直したこと</h2>
+                <p><strong>このツールで一番手を入れたのは、新しい機能ではなく、手元で自分だけが使う前提のまま残っていた部分でした。</strong>公開する場所に置いた途端、その前提がそのまま問題になりました。</p>
+
+                <div class="issues">
+                    <div class="issue">
+                        <h3>出典を示せない数字が2種類、画面に混ざっていた</h3>
+                        <p><strong>1つは他チャンネルとの比較機能。</strong>「同じジャンルの平均」と並べて表示していましたが、その平均値がどこから来た数字なのか説明できませんでした。実在するデータを集めて比較しているわけではなかったので、機能ごと削除しました。</p>
+                        <p><strong>もう1つは「高評価率 4%・コメント率 0.5%」という目安値。</strong>これは比較の基準として実際に役に立ちますが、出典のある統計ではありません。こちらは残して、画面に「出典のある統計ではない」と書きました。</p>
+                        <p>消したものと残したものの違いは、<strong>その数字が何なのかを画面で説明できるかどうか</strong>にしました。</p>
+                    </div>
+
+                    <div class="issue">
+                        <h3>キャッシュが訪問者全員で共有されていた</h3>
+                        <p>取得結果を貯める仕組みは、手元で1人で使う前提で書いていました。公開すると<strong>アプリを開いた全員が同じ貯蔵庫を読む</strong>ことになります。別のブラウザから開いて、他方で取得したデータが読めることを実際に確認しました。</p>
+                        <p>扱っているのは YouTube の公開データなので内容自体に問題はありません。ただ「表示された数字が自分のキーで取ったものとは限らない」のは利用者が知っておくべきことなので、README に仕様として明記しました。合わせて、同時アクセスで書き込みが競合しないよう SQLite の設定を変えています。</p>
+                    </div>
+
+                    <div class="issue">
+                        <h3>エラーが英語のまま出ていた</h3>
+                        <p>API から返る例外を、そのまま画面に流していた箇所が4つ。何が起きたのか利用者に伝わらないので、日本語のメッセージに変換する処理を通しました。</p>
+                    </div>
+                </div>
+
+                <h2>ここから学んだこと</h2>
+                <p><strong>自分用のツールを公開用に変えるとき、いちばん手を入れたのは「数字の出どころ」でした。</strong></p>
+                <p>自分で使っている間は、どの数字が実測でどれが仮置きかを覚えています。他人が見る画面では、覚えていることは何の役にも立ちません。<strong>説明できない数字は、消すか、説明を添えるかの二択</strong>になりました。</p>
+
+                <h2>公開について</h2>
+                <p>Streamlit Cloud で公開中です。使うには Google Cloud Console で取得した YouTube Data API v3 のキーが要ります（無料枠があります）。キーは画面から入力する方式で、こちらには保存されません。</p>
+                <p>Streamlit Cloud の<strong>無料枠</strong>で動かしているので、しばらくアクセスがないとアプリがスリープします。その場合は起動を促す画面が先に出ますので、ボタンを押してから立ち上がるまで、数分かかることがあります。</p>
+
+                <div class="detail-foot">
+                    <a href="https://pitawo-youtube-research.streamlit.app/" target="_blank" rel="noopener"
+                        class="button button-primary">アプリを開く</a>
+                    <a href="https://github.com/pitawo/youtube-research-tool" target="_blank" rel="noopener"
+                        class="button">GitHub で見る</a>
+                    <a href="../index.html#works" class="back-link">← WORKS 一覧へ</a>
+                </div>
+
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>ぴたお@AI🤖</p>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-labelledby="t">
+  <title id="t">URL 入力欄の下に再生回数などの統計カードとグラフが並んだ画面のイメージ</title>
+
+  <rect width="800" height="500" fill="#fafafb"/>
+
+  <!-- window -->
+  <rect x="40.5" y="40.5" width="719" height="419" rx="4" fill="#ffffff" stroke="#ebebef"/>
+  <line x1="40.5" y1="80.5" x2="759.5" y2="80.5" stroke="#ebebef"/>
+  <circle cx="62" cy="60" r="3.5" fill="#d8d8e0"/>
+  <circle cx="76" cy="60" r="3.5" fill="#d8d8e0"/>
+  <circle cx="90" cy="60" r="3.5" fill="#d8d8e0"/>
+  <rect x="330" y="55" width="140" height="10" rx="2" fill="#f2f3fd"/>
+
+  <!-- url input + analyze button -->
+  <rect x="72" y="108" width="34" height="7" rx="2" fill="#9a9aa6"/>
+  <rect x="72.5" y="126.5" width="530" height="30" rx="4" fill="#ffffff" stroke="#d8d8e0"/>
+  <rect x="90" y="138" width="240" height="8" rx="2" fill="#666672"/>
+  <rect x="620" y="126" width="108" height="31" rx="4" fill="#667eea"/>
+  <rect x="654" y="138" width="40" height="8" rx="2" fill="#ffffff"/>
+
+  <!-- stat cards -->
+  <g>
+    <rect x="72.5" y="184.5" width="152" height="62" rx="4" fill="#ffffff" stroke="#ebebef"/>
+    <rect x="88" y="200" width="46" height="7" rx="2" fill="#d8d8e0"/>
+    <rect x="88" y="217" width="64" height="13" rx="2" fill="#2a2a33"/>
+
+    <rect x="240.5" y="184.5" width="152" height="62" rx="4" fill="#ffffff" stroke="#ebebef"/>
+    <rect x="256" y="200" width="38" height="7" rx="2" fill="#d8d8e0"/>
+    <rect x="256" y="217" width="46" height="13" rx="2" fill="#2a2a33"/>
+
+    <rect x="408.5" y="184.5" width="152" height="62" rx="4" fill="#ffffff" stroke="#ebebef"/>
+    <rect x="424" y="200" width="52" height="7" rx="2" fill="#d8d8e0"/>
+    <rect x="424" y="217" width="40" height="13" rx="2" fill="#2a2a33"/>
+
+    <rect x="576.5" y="184.5" width="151" height="62" rx="4" fill="#ffffff" stroke="#ebebef"/>
+    <rect x="592" y="200" width="66" height="7" rx="2" fill="#d8d8e0"/>
+    <rect x="592" y="217" width="52" height="13" rx="2" fill="#667eea"/>
+  </g>
+
+  <!-- bar chart -->
+  <rect x="72.5" y="278.5" width="407" height="149" rx="4" fill="#ffffff" stroke="#ebebef"/>
+  <rect x="90" y="298" width="72" height="7" rx="2" fill="#9a9aa6"/>
+  <line x1="90.5" y1="404.5" x2="461.5" y2="404.5" stroke="#ebebef"/>
+  <g fill="#667eea">
+    <rect x="106" y="352" width="26" height="52" rx="2"/>
+    <rect x="156" y="330" width="26" height="74" rx="2"/>
+    <rect x="206" y="366" width="26" height="38" rx="2"/>
+    <rect x="256" y="318" width="26" height="86" rx="2"/>
+  </g>
+  <g fill="#d8d8e0">
+    <rect x="306" y="374" width="26" height="30" rx="2"/>
+    <rect x="356" y="358" width="26" height="46" rx="2"/>
+    <rect x="406" y="382" width="26" height="22" rx="2"/>
+  </g>
+
+  <!-- recent videos list -->
+  <rect x="496.5" y="278.5" width="231" height="149" rx="4" fill="#ffffff" stroke="#ebebef"/>
+  <rect x="514" y="298" width="54" height="7" rx="2" fill="#9a9aa6"/>
+  <line x1="496.5" y1="318.5" x2="727.5" y2="318.5" stroke="#ebebef"/>
+  <g>
+    <rect x="514" y="334" width="38" height="24" rx="3" fill="#e6e6ec"/>
+    <rect x="562" y="338" width="120" height="7" rx="2" fill="#666672"/>
+    <rect x="562" y="352" width="60" height="6" rx="2" fill="#d8d8e0"/>
+
+    <rect x="514" y="372" width="38" height="24" rx="3" fill="#e6e6ec"/>
+    <rect x="562" y="376" width="98" height="7" rx="2" fill="#666672"/>
+    <rect x="562" y="390" width="60" height="6" rx="2" fill="#d8d8e0"/>
+  </g>
+</svg>

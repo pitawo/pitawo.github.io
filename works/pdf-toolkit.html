@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF 変換・結合ツール | ぴたお@AI🤖</title>
+    <meta name="description" content="画像や Office 文書を PDF に変換し、結合とページ番号付けまでブラウザ上で終わらせるツール。自分用を公開用に変えたときに出た12件の話。">
+    <meta property="og:title" content="PDF 変換・結合ツール | ぴたお@AI🤖">
+    <meta property="og:description" content="画像や Office 文書を PDF に変換し、結合とページ番号付けまでブラウザ上で終わらせるツール。自分用を公開用に変えたときに出た12件の話。">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="https://fav.farm/✨" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="../index.html" class="wordmark">ぴたお@AI🤖</a>
+            <ul class="nav-links">
+                <li><a href="../index.html#works">WORKS</a></li>
+                <li><a href="../index.html#about">ABOUT</a></li>
+                <li><a href="../index.html#contact">CONTACT</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="detail-hero">
+            <div class="container">
+                <h1>PDF 変換・結合ツール</h1>
+                <p class="detail-meta">
+                    <span>2026-08</span>
+                    <span>Python / Streamlit / PyPDF2</span>
+                    <span>LibreOffice</span>
+                    <span>Claude Code</span>
+                </p>
+                <figure class="detail-figure">
+                    <img src="../Image/works/pdf-toolkit.svg" alt="左にアップロードしたファイルの一覧、右に変換オプションが並んだ画面のイメージ">
+                </figure>
+            </div>
+        </section>
+
+        <article class="detail">
+            <div class="container">
+
+                <h2>なぜ作ったか</h2>
+                <p>PDF の細かい作業は、そのたびに変換サービスを検索して使っていました。ただ、この種のサービスはどれも<strong>手元のファイルを相手のサーバーに預ける</strong>ことになります。中身を見せたくない資料では使いにくくなります。</p>
+                <p>自分がやりたい操作は4つ（変換・結合・ページ番号・並べ替え）しかなかったので、その4つだけが載った画面を作りました。手元で起動すればファイルは自分のパソコンから出ません。誰でも触れる版として、同じコードを Streamlit Cloud にも置いてあります。</p>
+
+                <h2>どう作ったか</h2>
+                <p>画面は Streamlit で、PDF の操作は PyPDF2 と reportlab。Office 文書（Word / Excel / PowerPoint）の変換だけは Python のライブラリでは精度が出ないので、LibreOffice をコマンドとして呼び出して変換させています。もともとは自分だけが使っていたものを、公開するにあたって全体を見直しました。</p>
+
+                <h3>できること</h3>
+                <ul>
+                    <li>ファイル変換 — 画像（JPG / PNG）と Office 文書を PDF に変換</li>
+                    <li>PDF 結合 — 複数ファイルを1つにまとめる</li>
+                    <li>ページ番号 — 各ページの右上に「1/10」形式で付与</li>
+                    <li>順序変更 — アップロード後に上下ボタンで並べ替え・削除</li>
+                </ul>
+
+                <h2>詰まった点と、直したこと</h2>
+                <p>自分しか使わないうちは1つも表に出なかった問題が、<strong>「誰でも触れる場所に置く」と決めた途端に12件出てきました。</strong></p>
+
+                <div class="issues">
+                    <div class="issue">
+                        <h3>アップロードしたファイル名が、そのまま保存先になっていた</h3>
+                        <p>保存先を「一時フォルダ＋アップロードされた名前」で組み立てていました。ファイル名は利用者が自由に決められるので、<code>../</code> を含む名前を送ると一時フォルダの外に書き込めます。実際に試して再現しました。</p>
+                        <p>ファイル名を安全な形に直す処理を1つ作り、ファイルを置く箇所すべてをそこに通しました。</p>
+                    </div>
+
+                    <div class="issue">
+                        <h3>2人が同時に変換すると片方が落ちる</h3>
+                        <p>LibreOffice は自分の設定を1つのフォルダで持っていて、同時に2つ起動すると取り合いになります。手元で1人で使う分には起きませんが、公開すると閲覧者が同じ場所を共有するので簡単に起きます。</p>
+                        <p>変換のたびに専用の設定フォルダを割り当てて、取り合いが起きないようにしました。</p>
+                    </div>
+
+                    <div class="issue">
+                        <h3>ファイルを選んだ瞬間に画面が落ちる</h3>
+                        <p>パスワード付き・壊れている・中身が空、この3つのどれかを選ぶと、<strong>変換ボタンを押す前に</strong>画面が落ちていました。読み込みを試す処理に、失敗したときの受け皿が無かったためです。</p>
+                        <p>読み込みを1か所にまとめて検査を通し、駄目なファイルは日本語のメッセージで断るようにしました。ライブラリが返す英語のエラーも、対処のわかる日本語に置き換えています。</p>
+                    </div>
+                </div>
+
+                <h3>そのほかに直したもの</h3>
+                <ul>
+                    <li>範囲外のページを指定すると中身が空の PDF ができ、そのままダウンロードできた</li>
+                    <li>同じ名前のファイルを2つ入れると、片方が上書きされて結合結果から消えていた</li>
+                    <li>エラー画面に自分のパソコンのフォルダ名が出ていた</li>
+                </ul>
+
+                <h2>ここから学んだこと</h2>
+                <p><strong>「動く」と「他人が触っても壊れない」は別でした。</strong>自分で使っている間は、壊れる操作を無意識に避けています。壊れたファイルを選ばないし、2つ同時に変換もしません。</p>
+                <p>公開する場所に置くというのは、<strong>自分がやらない操作を全部やられる場所に置く</strong>ということでした。修正12件のうち、機能を足したものは1つもありません。</p>
+
+                <h2>公開について</h2>
+                <p>Streamlit Cloud で公開中です。アカウント登録なしでその場で使えます。手元で動かす場合は LibreOffice のインストールが要ります（Office 文書を変換しないなら不要）。</p>
+                <p>Streamlit Cloud の<strong>無料枠</strong>で動かしているので、しばらくアクセスがないとアプリがスリープします。その場合は起動を促す画面が先に出ますので、ボタンを押してから立ち上がるまで、数分かかることがあります。</p>
+
+                <div class="detail-foot">
+                    <a href="https://pdf-toolkit-gqdtevrl2qeg9bqfw4fpmb.streamlit.app/" target="_blank" rel="noopener"
+                        class="button button-primary">アプリを開く</a>
+                    <a href="https://github.com/pitawo/pdf-toolkit" target="_blank" rel="noopener"
+                        class="button">GitHub で見る</a>
+                    <a href="../index.html#works" class="back-link">← WORKS 一覧へ</a>
+                </div>
+
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>ぴたお@AI🤖</p>
+        </div>
+    </footer>
+</body>
+
+</html>
