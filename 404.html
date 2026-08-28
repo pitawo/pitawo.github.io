@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ページが見つかりません | ぴたお@AI🤖</title>
+    <meta name="robots" content="noindex">
+    <link rel="icon" href="https://fav.farm/✨" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <script>
+        // デモは1枚の HTML で画面を切り替える作りのため、
+        // /demo/cafe-site/menu のような途中の画面を直接開くとファイルが無い。
+        // GitHub Pages はサイト直下の 404.html しか返さないので、ここで受けて
+        // デモの入口へ渡す。元のパスは sessionStorage で引き継ぐ。
+        (function () {
+            var p = location.pathname;
+            var base = '/demo/cafe-site/';
+            if (p.indexOf(base) === 0 && p !== base) {
+                try { sessionStorage.setItem('spa-redirect', p + location.search + location.hash); } catch (e) { /* 保存できなくても入口には行く */ }
+                location.replace(base);
+            }
+        })();
+    </script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="/" class="wordmark">ぴたお@AI🤖</a>
+            <ul class="nav-links">
+                <li><a href="/#works">WORKS</a></li>
+                <li><a href="/#about">ABOUT</a></li>
+                <li><a href="/#contact">CONTACT</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="detail-hero">
+            <div class="container">
+                <h1>ページが見つかりません</h1>
+                <p class="lead">お探しのページは移動したか、URL が違うようです。</p>
+                <p style="margin-top: 2rem;">
+                    <a href="/#works" class="button button-primary">作ったものを見る</a>
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>ぴたお@AI🤖</p>
+        </div>
+    </footer>
+</body>
+
+</html>
