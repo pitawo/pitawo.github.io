@@ -250,6 +250,15 @@ section {
     object-fit: cover;
 }
 
+.work-category {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+}
+
 .work-head {
     display: flex;
     align-items: baseline;
@@ -453,6 +462,35 @@ article.detail li {
 article.detail strong {
     color: var(--ink);
     font-weight: 500;
+}
+
+/* ---------- table ---------- */
+
+.table-wrap {
+    max-width: 40rem;
+    margin: 0 0 1.5rem;
+    overflow-x: auto;
+}
+
+article.detail table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.86rem;
+}
+
+article.detail th,
+article.detail td {
+    padding: 0.55rem 0.9rem 0.55rem 0;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: top;
+}
+
+article.detail th {
+    border-bottom-color: var(--line-strong);
+    color: var(--ink);
+    font-weight: 500;
+    white-space: nowrap;
 }
 
 code {
