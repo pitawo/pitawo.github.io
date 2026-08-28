@@ -5,6 +5,19 @@
     <link rel="icon" type="image/svg+xml" href="/demo/cafe-site/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>cafe-site</title>
+    <script>
+      // 途中の画面を直接開いたとき、配信元の 404 ページが元のパスを
+      // sessionStorage に置いて入口へ回してくる。ここで元の場所へ戻す。
+      (function () {
+        try {
+          var to = sessionStorage.getItem('spa-redirect');
+          if (to) {
+            sessionStorage.removeItem('spa-redirect');
+            history.replaceState(null, '', to);
+          }
+        } catch (e) { /* 使えない環境では入口のまま表示する */ }
+      })();
+    </script>
     <script type="module" crossorigin src="/demo/cafe-site/assets/index-C4yDUoue.js"></script>
     <link rel="stylesheet" crossorigin href="/demo/cafe-site/assets/index-C6yPnvJP.css">
   </head>
