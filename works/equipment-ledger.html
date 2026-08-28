@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>備品貸出管理アプリ | ぴたお@AI🤖</title>
+    <meta name="description" content="カメラや機材の貸出・返却・予約をブラウザで管理するツール。説明に書いてある安全装置が実際には効いていなかった話。">
+    <meta property="og:title" content="備品貸出管理アプリ | ぴたお@AI🤖">
+    <meta property="og:description" content="カメラや機材の貸出・返却・予約をブラウザで管理するツール。説明に書いてある安全装置が実際には効いていなかった話。">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="https://fav.farm/✨" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="../index.html" class="wordmark">ぴたお@AI🤖</a>
+            <ul class="nav-links">
+                <li><a href="../index.html#works">WORKS</a></li>
+                <li><a href="../index.html#about">ABOUT</a></li>
+                <li><a href="../index.html#contact">CONTACT</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="detail-hero">
+            <div class="container">
+                <h1>備品貸出管理アプリ</h1>
+                <p class="detail-meta">
+                    <span>2026-08</span>
+                    <span>Python / Flask</span>
+                    <span>Socket.IO</span>
+                    <span>Claude Code</span>
+                </p>
+                <figure class="detail-figure">
+                    <img src="../Image/works/equipment-ledger.svg" alt="左に予約フォーム、右に備品の稼働状況カードが並んだ画面のイメージ">
+                </figure>
+            </div>
+        </section>
+
+        <article class="detail">
+            <div class="container">
+
+                <h2>なぜ作ったか</h2>
+                <p>機材を何人かで共有していると、「今どれが空いているか」が誰にも分からなくなります。紙やチャットで管理すると、借りたまま返却の記録が抜けたり、同じ日に二人が同じものを予定していたりします。</p>
+                <p>一覧を開けば空き状況がすぐ分かり、予約が重なったらその場で断ってくれる状態にしたかったので作りました。</p>
+
+                <h2>どう作ったか</h2>
+                <p>Flask で作りました。画面は一覧と予約フォームの1ページで、貸出・返却・設定変更のたびに Socket.IO で全員の画面を更新します。データは JSON ファイルに保存し、操作のたびに書き込みます。</p>
+
+                <h3>できること</h3>
+                <ul>
+                    <li>予約 — 備品と期間と目的を指定する。<strong>同じ期間に別の予約は入れられない</strong></li>
+                    <li>稼働状況 — 利用可能／貸出中を一覧表示。予約は「利用中／これからの予約／終了済み」に分かれる</li>
+                    <li>備品マスター — 追加・改名・削除</li>
+                    <li>ログイン — メールとパスワード。パスワードはハッシュ化して保存する</li>
+                </ul>
+
+                <h2>詰まった点と、直したこと</h2>
+                <p><strong>このアプリで一番危なかったのは、説明に書いてある安全装置が、実際には効いていなかったことでした。</strong></p>
+
+                <div class="issues">
+                    <div class="issue">
+                        <h3>予約が入っている備品を消せてしまう</h3>
+                        <p>「貸出中の備品は削除できない」と説明に書いていました。実装も、削除の前に状態を調べる形になっていました。</p>
+                        <p>ところがその判定は「<strong>今日が予約期間の中にあるか</strong>」しか見ていませんでした。つまり来週の予約が入っている備品は「空き」と判定され、予約ごと削除できてしまいます。消えたことは予約した人には伝わりません。</p>
+                        <p>判定を「今日以降に終わる予約が1件でも残っているか」に変え、消せなかったときは理由を画面に出すようにしました。</p>
+                        <p><strong>この不具合は、最初に書いたテストでは見つかりませんでした。</strong>削除に渡すパラメータ名を間違えていて、削除処理そのものが実行されていなかったからです。「削除できないこと」を確かめるテストが、何も起きていないことを確かめて通っていました。名前を直した瞬間に、備品が消えました。</p>
+                    </div>
+
+                    <div class="issue">
+                        <h3>説明に書いてある機能が、実装のどこにも無かった</h3>
+                        <p>「毎日決まった時刻に自動保存する」と書いてあり、そのためのライブラリも依存に入っていました。実装を探したところ、<strong>呼び出しが1か所も無かった</strong>。書いたつもりで終わっていたわけです。</p>
+                        <p>説明から削除し、依存も外しました。代わりに、実際に動いている保存の仕組み（操作のたび・終了時・手動）だけを書いています。</p>
+                    </div>
+
+                    <div class="issue">
+                        <h3>本番でだけ起動に失敗する</h3>
+                        <p>手元では問題なく動いたのに、公開すると起動直後に落ちました。</p>
+                        <p><code>ImportError: Entry point ('gunicorn.workers', 'eventlet') not found</code></p>
+                        <p>手元で使っていた起動方法と、公開先で使われる起動方法が違っていました。手元は開発用サーバー、公開先は gunicorn 経由です。<strong>手元では通らない経路が本番にだけあります。</strong></p>
+                        <p>リアルタイム更新の方式を、追加のライブラリが要らないものに変えました。依存が1つ減り、環境の違いに左右されにくくなっています。</p>
+                    </div>
+
+                    <div class="issue">
+                        <h3>登録しないと何も見えない</h3>
+                        <p>公開して気づきました。訪問者が最初に見るのはログイン画面で、アカウントを作らないと中身が分かりません。</p>
+                        <p>「登録せずにデモを見る」を追加しました。見学用の利用者はいなければその場で作られるので、サーバーが再起動しても入れます。</p>
+                    </div>
+                </div>
+
+                <h2>ここから学んだこと</h2>
+                <p><strong>「書いてあること」と「動いていること」は、確かめるまで別物でした。</strong>このアプリでは3回それを踏みました。説明にある安全装置が効いていない、説明にある機能が存在しない、手元で動くものが本番で動かない。どれも画面は正常に見えていました。</p>
+                <p>もう1つは、<strong>テストが通ったことと、テストが検証できていることは違う</strong>という点です。パラメータ名を1つ間違えただけで、テストは「何も起きていない状態」を成功として報告し続けました。テストを書いたら、一度わざと失敗させて、本当に見たいものを見ているか確かめるようにしています。</p>
+
+                <h2>公開について</h2>
+                <p>Render の無料枠で公開しています。しばらくアクセスがないとスリープするため、最初の表示に時間がかかることがあります。</p>
+                <p><strong>永続ディスクを付けていないので、再起動すると入力したデータは初期状態に戻ります。</strong>見学で触ってもらう分にはそのほうが都合がよいと判断しました。</p>
+
+                <div class="detail-foot">
+                    <a href="https://equipment-ledger.onrender.com/" target="_blank" rel="noopener"
+                        class="button button-primary">デモを触る</a>
+                    <a href="https://github.com/pitawo/equipment-ledger" target="_blank" rel="noopener"
+                        class="button">GitHub で見る</a>
+                    <a href="../index.html#works" class="back-link">← WORKS 一覧へ</a>
+                </div>
+
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>ぴたお@AI🤖</p>
+        </div>
+    </footer>
+</body>
+
+</html>

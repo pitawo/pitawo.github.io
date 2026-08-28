@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-labelledby="t">
+  <title id="t">左に予約フォーム、右に備品の稼働状況カードが並んだ画面のイメージ</title>
+
+  <rect width="800" height="500" fill="#fafafb"/>
+
+  <!-- window -->
+  <rect x="40.5" y="40.5" width="719" height="419" rx="4" fill="#ffffff" stroke="#ebebef"/>
+  <line x1="40.5" y1="80.5" x2="759.5" y2="80.5" stroke="#ebebef"/>
+  <circle cx="62" cy="60" r="3.5" fill="#d8d8e0"/>
+  <circle cx="76" cy="60" r="3.5" fill="#d8d8e0"/>
+  <circle cx="90" cy="60" r="3.5" fill="#d8d8e0"/>
+  <rect x="330" y="55" width="140" height="10" rx="2" fill="#f2f3fd"/>
+
+  <!-- status pills（利用可能 / 貸出中 / 総数） -->
+  <rect x="470" y="98" width="82" height="20" rx="4" fill="#f2f3fd"/>
+  <rect x="484" y="105" width="54" height="6" rx="2" fill="#667eea"/>
+  <rect x="562" y="98" width="72" height="20" rx="4" fill="#f7f7fb"/>
+  <rect x="574" y="105" width="48" height="6" rx="2" fill="#9a9aa6"/>
+  <rect x="644" y="98" width="72" height="20" rx="4" fill="#f7f7fb"/>
+  <rect x="656" y="105" width="48" height="6" rx="2" fill="#9a9aa6"/>
+
+  <!-- 予約フォーム -->
+  <rect x="72.5" y="136.5" width="216" height="286" rx="4" fill="#ffffff" stroke="#ebebef"/>
+  <rect x="90" y="156" width="60" height="8" rx="2" fill="#9a9aa6"/>
+
+  <rect x="90" y="184" width="44" height="6" rx="2" fill="#d8d8e0"/>
+  <rect x="90.5" y="196.5" width="180" height="24" rx="4" fill="#ffffff" stroke="#d8d8e0"/>
+  <rect x="102" y="205" width="86" height="7" rx="2" fill="#666672"/>
+
+  <rect x="90" y="234" width="28" height="6" rx="2" fill="#d8d8e0"/>
+  <rect x="90.5" y="246.5" width="180" height="24" rx="4" fill="#f7f7fb" stroke="#ebebef"/>
+  <rect x="102" y="255" width="58" height="7" rx="2" fill="#9a9aa6"/>
+
+  <rect x="90" y="284" width="42" height="6" rx="2" fill="#d8d8e0"/>
+  <rect x="90.5" y="296.5" width="84" height="24" rx="4" fill="#ffffff" stroke="#d8d8e0"/>
+  <rect x="102" y="305" width="48" height="7" rx="2" fill="#9a9aa6"/>
+  <rect x="186.5" y="296.5" width="84" height="24" rx="4" fill="#ffffff" stroke="#d8d8e0"/>
+  <rect x="198" y="305" width="48" height="7" rx="2" fill="#9a9aa6"/>
+
+  <rect x="90.5" y="334.5" width="180" height="38" rx="4" fill="#ffffff" stroke="#d8d8e0"/>
+  <rect x="102" y="345" width="96" height="6" rx="2" fill="#e6e6ec"/>
+
+  <rect x="90" y="386" width="180" height="26" rx="4" fill="#667eea"/>
+  <rect x="152" y="396" width="56" height="7" rx="2" fill="#ffffff"/>
+
+  <!-- 稼働状況カード（2列×3行） -->
+  <g>
+    <rect x="320.5" y="136.5" width="196" height="88" rx="4" fill="#ffffff" stroke="#ebebef"/>
+    <rect x="320.5" y="136.5" width="3" height="88" fill="#5bbd8a"/>
+    <rect x="340" y="154" width="92" height="8" rx="2" fill="#2a2a33"/>
+    <rect x="448" y="152" width="52" height="14" rx="3" fill="#eaf6ef"/>
+    <rect x="340" y="184" width="60" height="6" rx="2" fill="#e6e6ec"/>
+
+    <rect x="532.5" y="136.5" width="195" height="88" rx="4" fill="#ffffff" stroke="#ebebef"/>
+    <rect x="532.5" y="136.5" width="3" height="88" fill="#5bbd8a"/>
+    <rect x="552" y="154" width="78" height="8" rx="2" fill="#2a2a33"/>
+    <rect x="659" y="152" width="52" height="14" rx="3" fill="#eaf6ef"/>
+    <rect x="552" y="184" width="60" height="6" rx="2" fill="#e6e6ec"/>
+
+    <rect x="320.5" y="238.5" width="196" height="88" rx="4" fill="#ffffff" stroke="#ebebef"/>
+    <rect x="320.5" y="238.5" width="3" height="88" fill="#e08a8a"/>
+    <rect x="340" y="256" width="84" height="8" rx="2" fill="#2a2a33"/>
+    <rect x="444" y="254" width="56" height="14" rx="3" fill="#fbeeee"/>
+    <rect x="340" y="282" width="112" height="6" rx="2" fill="#666672"/>
+    <rect x="340" y="298" width="86" height="6" rx="2" fill="#e6e6ec"/>
+
+    <rect x="532.5" y="238.5" width="195" height="88" rx="4" fill="#ffffff" stroke="#ebebef"/>
+    <rect x="532.5" y="238.5" width="3" height="88" fill="#5bbd8a"/>
+    <rect x="552" y="256" width="96" height="8" rx="2" fill="#2a2a33"/>
+    <rect x="659" y="254" width="52" height="14" rx="3" fill="#eaf6ef"/>
+    <rect x="552" y="286" width="60" height="6" rx="2" fill="#e6e6ec"/>
+
+    <rect x="320.5" y="340.5" width="196" height="82" rx="4" fill="#ffffff" stroke="#ebebef"/>
+    <rect x="320.5" y="340.5" width="3" height="82" fill="#5bbd8a"/>
+    <rect x="340" y="358" width="74" height="8" rx="2" fill="#2a2a33"/>
+    <rect x="448" y="356" width="52" height="14" rx="3" fill="#eaf6ef"/>
+    <rect x="340" y="386" width="60" height="6" rx="2" fill="#e6e6ec"/>
+
+    <rect x="532.5" y="340.5" width="195" height="82" rx="4" fill="#ffffff" stroke="#ebebef"/>
+    <rect x="532.5" y="340.5" width="3" height="82" fill="#5bbd8a"/>
+    <rect x="552" y="358" width="88" height="8" rx="2" fill="#2a2a33"/>
+    <rect x="659" y="356" width="52" height="14" rx="3" fill="#eaf6ef"/>
+    <rect x="552" y="386" width="60" height="6" rx="2" fill="#e6e6ec"/>
+  </g>
+</svg>
