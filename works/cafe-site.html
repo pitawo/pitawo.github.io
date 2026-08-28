@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>カフェの注文サイト | ぴたお@AI🤖</title>
+    <meta name="description" content="商品を選んでカートに入れ、決済画面を経て注文完了まで進めるカフェの注文サイト。動作確認のために書いた1行が公開まで残っていた話。">
+    <meta property="og:title" content="カフェの注文サイト | ぴたお@AI🤖">
+    <meta property="og:description" content="商品を選んでカートに入れ、決済画面を経て注文完了まで進めるカフェの注文サイト。動作確認のために書いた1行が公開まで残っていた話。">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="https://fav.farm/✨" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="../index.html" class="wordmark">ぴたお@AI🤖</a>
+            <ul class="nav-links">
+                <li><a href="../index.html#works">WORKS</a></li>
+                <li><a href="../index.html#about">ABOUT</a></li>
+                <li><a href="../index.html#contact">CONTACT</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="detail-hero">
+            <div class="container">
+                <h1>カフェの注文サイト</h1>
+                <p class="detail-meta">
+                    <span>2026-08</span>
+                    <span>React / Vite</span>
+                    <span>React Router / Vitest</span>
+                </p>
+                <figure class="detail-figure">
+                    <img src="../Image/works/cafe-site.webp" alt="注文明細と金額の内訳、受け取り方法の入力欄が並んだ決済画面">
+                    <figcaption>公開しているデモの決済画面</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <article class="detail">
+            <div class="container">
+
+                <h2>なぜ作ったか</h2>
+                <p>買い物のサイトは、見た目を作るところまでは早いです。難しいのはその先で、<strong>カートの中身を持ち回り、金額を計算し、決済画面まで途切れずにつなぐ</strong>ところに手間がかかります。</p>
+                <p>作りかけで止まっているものが手元にあったので、注文から決済まで一本の流れとして通せる状態にしました。</p>
+
+                <h2>どう作ったか</h2>
+                <p>React と Vite。画面は6つ（トップ・メニュー・カート・決済・完了・サインイン）で、React Router で切り替えます。カートの状態は Context にまとめ、金額の計算もそこに置きました。</p>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr><th>項目</th><th>計算</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>小計</td><td>単価 × 数量の合計</td></tr>
+                            <tr><td>消費税</td><td>小計の 10%</td></tr>
+                            <tr><td>配送料</td><td>店頭受け取りは無料、配達は $3.00</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>受け取り方法を切り替えると合計が変わります。</p>
+
+                <p><strong>決済画面は省略しませんでした。</strong>カード番号・名義・有効期限・セキュリティコードの入力欄を持ち、支払いボタンには金額を出します。押すと待ち時間を挟んで完了画面へ進みます。</p>
+                <p>ただし<strong>カード情報はデモ用の値を入れて読み取り専用にしました。</strong>触りに来た人が実在のカード番号を打ち込む余地をなくすためです。入力された内容はブラウザの外に出ません。</p>
+
+                <h2>詰まった点と、直したこと</h2>
+                <p><strong>このサイトで一番まずかったのは、入力されたパスワードを記録していたことでした。</strong></p>
+
+                <div class="issues">
+                    <div class="issue">
+                        <h3>パスワードがそのまま記録に残っていた</h3>
+                        <p>認証の処理に、入力されたメールアドレスとパスワードを開発者向けの記録に出す1行が残っていました。動作を確かめるために書いたものが、そのまま公開の手前まで来ていたわけです。</p>
+                        <p>削除したうえで、<strong>パスワードの入力欄そのものを廃止しました。</strong>このデモには認証サーバーが無く、パスワードを照合する相手がいません。持たないほうが正しい。サインインはメールアドレスだけ、しかも入力は任意にしました。</p>
+                    </div>
+
+                    <div class="issue">
+                        <h3>読み込み直すとカートが消える</h3>
+                        <p>カートの中身を画面の状態としてだけ持っていたので、ページを再読み込みすると空に戻りました。商品を選んでいる途中で戻るボタンを押しただけで消えます。</p>
+                        <p>ブラウザの中に保存するようにしました。保存できない環境では、その回のあいだだけ保持する形にしてあります。</p>
+                    </div>
+
+                    <div class="issue">
+                        <h3>空のカートで注文できた</h3>
+                        <p>カートが空でも決済画面に進めて、合計 $0.00 のまま注文が完了しました。空のときは決済に進ませず、メニューへ案内するようにしました。</p>
+                    </div>
+
+                    <div class="issue">
+                        <h3>テストが通っていたのに、何も確かめていなかった</h3>
+                        <p>購入の流れを確かめるテストを10項目書いて、全部通りました。<strong>その後で、実装をわざと壊してみました。</strong></p>
+                        <p>カード欄の読み取り専用を外したら、カードのテストだけが落ちました。消費税の率を 10% から 8% に変えたら、金額を見ている3件が落ちました。</p>
+                        <p><strong>通ったことと、確かめられていることは違います。</strong>壊して初めて、テストが本当にその場所を見ているか分かりました。</p>
+                    </div>
+                </div>
+
+                <h2>ここから学んだこと</h2>
+                <p><strong>動作を確かめるために書いたものが、そのまま公開まで残ります。</strong>パスワードを記録に出す1行は、書いた時点では確認のためのものでした。消す前提のものほど、消し忘れても誰も困らないので残り続けます。</p>
+                <p>もう1つは、<strong>「危ないから消す」と「見せたいから残す」は両立できる</strong>という点です。決済画面は、このサイトで一番見せたい部分でした。最初はカード欄ごと削ろうとしましたが、それでは見せたいものが無くなります。<strong>入力できなくすれば、画面は残せます。</strong></p>
+
+                <h2>公開について</h2>
+                <p>静的なサイトなので、開けばすぐ動きます。サインインは入力なしで通れます。カートの中身はブラウザの中にだけ残ります。</p>
+                <p>配信はサブディレクトリなので、ビルド時に基準パスを渡し、画面遷移の基準もそれに合わせています。加えて、<code>/menu</code> のような途中の画面を直接開いてもアプリが引き受けられるよう、<code>404.html</code> に入口と同じ中身を置きました。</p>
+
+                <div class="detail-foot">
+                    <a href="../demo/cafe-site/" class="button button-primary">デモを触る</a>
+                    <a href="https://github.com/pitawo/cafe-site" target="_blank" rel="noopener"
+                        class="button">GitHub で見る</a>
+                    <a href="../index.html#works" class="back-link">← WORKS 一覧へ</a>
+                </div>
+
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>ぴたお@AI🤖</p>
+        </div>
+    </footer>
+</body>
+
+</html>
