@@ -28,3 +28,8 @@ build/
 # Drafts / personal notes
 drafts/
 TODO.local.md
+
+# 内部の設計書・計画メモ（公開しない）
+# ローカルには残す。HTML はここから生成するが、生成元を公開する必要はない。
+source/
+README.internal.md
