@@ -78,14 +78,15 @@
         color:var(--ink-muted); font-size:14px;
       }
       .panel{display:none}
-      #t-a:checked ~ .tabs label[for="t-a"],
-      #t-b:checked ~ .tabs label[for="t-b"],
-      #t-c:checked ~ .tabs label[for="t-c"]{
+      /* input は .hero の兄弟なので、.hero を経由して子孫を指す */
+      #t-a:checked ~ .hero .tabs label[for="t-a"],
+      #t-b:checked ~ .hero .tabs label[for="t-b"],
+      #t-c:checked ~ .hero .tabs label[for="t-c"]{
         background:var(--brand); color:#fff; border-color:var(--brand);
       }
-      #t-a:checked ~ .panels .panel-a,
-      #t-b:checked ~ .panels .panel-b,
-      #t-c:checked ~ .panels .panel-c{display:block}
+      #t-a:checked ~ .hero .panels .panel-a,
+      #t-b:checked ~ .hero .panels .panel-b,
+      #t-c:checked ~ .hero .panels .panel-c{display:block}
 
       .how{
         margin-top:22px; background:#fff; border:1px solid var(--line);
