@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>フォーム回答のスコアリングと結果配信 | ぴたお@AI🤖</title>
+    <meta name="description" content="フォームの回答を自動でスコア化し、判定タイプごとに内容を変えてメールを送る GAS ツール。運用に入ってから壊れた4箇所を直した話。">
+    <meta property="og:title" content="フォーム回答のスコアリングと結果配信 | ぴたお@AI🤖">
+    <meta property="og:description" content="フォームの回答を自動でスコア化し、判定タイプごとに内容を変えてメールを送る GAS ツール。運用に入ってから壊れた4箇所を直した話。">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="https://fav.farm/✨" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="../index.html" class="wordmark">ぴたお@AI🤖</a>
+            <ul class="nav-links">
+                <li><a href="../index.html#works">WORKS</a></li>
+                <li><a href="../index.html#about">ABOUT</a></li>
+                <li><a href="../index.html#contact">CONTACT</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="detail-hero">
+            <div class="container">
+                <h1>フォーム回答のスコアリングと結果配信</h1>
+                <p class="detail-meta">
+                    <span>2026-08</span>
+                    <span>Google Apps Script</span>
+                    <span>JavaScript</span>
+                    <span>Google Workspace</span>
+                </p>
+                <figure class="detail-figure">
+                    <img src="../Image/works/gas-form-scoring.svg" alt="スコアとタイプを大きく示した帯の下に、判定結果の本文と案内ボタンが並ぶ結果ページのイメージ">
+                </figure>
+            </div>
+        </section>
+
+        <article class="detail">
+            <div class="container">
+
+                <h2>なぜ作ったか</h2>
+                <p>依頼を受けて作ったツールです。診断形式のアンケートに答えてもらい、その結果に応じて別々の案内を届けたい、という要件でした。</p>
+                <p>手作業でやると、回答を1件ずつ見て、点数を数えて、該当する文面を選んで、コピーして送ることになります。回答が増えるほど時間がかかり、しかも数え間違いが混ざります。<strong>回答が届いた時点で、正しい相手に正しい内容が届いている状態</strong>にしたかったので作りました。</p>
+                <p>もう1つ、送ったメールは埋もれます。「あのとき何点だったか」をあとから確認できる場所が要ると考え、結果を再表示できるページも一緒に作りました。</p>
+
+                <h2>どう作ったか</h2>
+                <p>Google Apps Script で組みました。フォーム送信をきっかけに処理が走ります。</p>
+                <p><code>フォーム送信 → スプレッドシートに記録 → Yes/No の設問を集計してスコアを出す → スコアからタイプを判定（A / B / C） → メタ列に書き込む → タイプ別の内容でメールを送信 → 結果ページでいつでも再表示</code></p>
+                <p>結果ページには入り口を2つ用意しました。メールに載せたトークン付きURLと、<strong>メールアドレスを入力する方法</strong>です。URLを失くしても自分で辿り着けます。</p>
+                <p>設問・判定の区切り・文面はすべて設定として上に出してあります。中身を変えるのにコードを触る必要はありません。</p>
+
+                <h2>詰まった点と、直したこと</h2>
+                <p><strong>作った直後は動いていました。壊れたのは運用に入ってからです。</strong></p>
+
+                <div class="issues">
+                    <div class="issue">
+                        <h3>同じ人が送信したのに、結果ページで見つからない</h3>
+                        <p>メールアドレスで検索する経路が、ときどき失敗しました。原因は Gmail の仕様でした。</p>
+                        <ul>
+                            <li><code>taro+form@gmail.com</code> と <code>taro@gmail.com</code> は同じ受信箱に届く</li>
+                            <li><code>ta.ro@gmail.com</code> も同じ</li>
+                        </ul>
+                        <p>フォームに入れたアドレスと、結果ページに入力したアドレスが、<strong>本人にとっては同じでも文字列としては違っていました。</strong>gmail 系のドメインでは <code>+</code> 以降を削除し、ドットを無視してから比較するようにしました。</p>
+                        <p>この分岐は、設計している段階では思いつきませんでした。実際に「見つかりません」と言われて初めて気づいたところです。</p>
+                    </div>
+
+                    <div class="issue">
+                        <h3>設問の見出しが一致しない</h3>
+                        <p>スコアの集計は、シートの見出しと設定した設問文を突き合わせて行います。ところが<strong>全角スペースが1つ混ざっているだけで一致しなくなります。</strong>フォームを編集したときに紛れ込みます。</p>
+                        <p>全角→半角、連続スペースの圧縮、前後の空白削除を通してから比較するようにしました。あわせて、一致しない見出しがあれば<strong>どの設問で失敗したかを名指しで出す</strong>ようにしています。「動きません」だけでは直せないためです。</p>
+                    </div>
+
+                    <div class="issue">
+                        <h3>メールの列が、いつも同じ場所にない</h3>
+                        <p>フォームの設定によって、メールアドレスがどの列に入るかが変わります。列を固定すると、設定が変わった瞬間に動かなくなります。</p>
+                        <p>2段階で探すようにしました。まずヘッダ名から探し（<code>mail</code> / <code>メール</code> / <code>e-mail</code> を含む列）、見つからなければ<strong>データそのものを見て推定します</strong>（先頭30行を調べ、<code>@</code> が3回以上出現する列を候補に加える）。</p>
+                    </div>
+
+                    <div class="issue">
+                        <h3>トリガーが止まっていた期間の回答が、空のまま残る</h3>
+                        <p>権限の再承認などでトリガーが止まると、その間の回答にはスコアもタイプも書かれません。気づいたときには数十件たまっています。</p>
+                        <p><strong>既存の全行を再計算する関数</strong>を用意しました。手動で実行すると、空いている行を埋め直します。すでに発行済みのトークンはそのまま残すので、配ったURLは生きたままになります。</p>
+                    </div>
+                </div>
+
+                <h2>ここから学んだこと</h2>
+                <p><strong>「入力は正しい形で来る」という前提が、いちばん最初に壊れました。</strong>メールアドレスの表記ゆれも、見出しの全角スペースも、列の位置も、すべて「そうなっているはず」と思っていたところでした。</p>
+                <p>そして直し方が共通していました。<strong>厳密に一致させようとするのではなく、揺れを吸収してから比較する。</strong>正規化を挟むだけで、後から起きるはずだった問題がまとめて消えました。</p>
+                <p>もう1つは、<strong>復旧する手段を最初から持っておくこと</strong>です。自動化は止まります。止まったこと自体は避けられません。止まったあとに手作業へ戻らずに済むかどうかで、運用の負担がまったく変わります。再計算の関数を書いておいたおかげで、止まっていた期間の後始末が実行1回で終わりました。</p>
+
+                <h2>公開について</h2>
+                <p><strong>依頼元から実績として掲載する許可を得たうえで、設問・文面・URL・配色をサンプルに差し替えて公開しています。</strong>処理のロジックは、実際に運用していたものと同じです。</p>
+                <p>デモは結果ページの表示を再現したものです。GAS のウェブアプリは Google アカウント上にデプロイして動くため、そのままでは触れる形で置けません。<strong>表示されている内容は、スクリプトが生成するものと同じ構造にしてあります。</strong></p>
+
+                <div class="detail-foot">
+                    <a href="https://pitawo.github.io/demo/gas-form-scoring/" target="_blank" rel="noopener"
+                        class="button button-primary">デモを見る</a>
+                    <a href="https://github.com/pitawo/gas-form-scoring" target="_blank" rel="noopener"
+                        class="button">GitHub で見る</a>
+                    <a href="../index.html#works" class="back-link">← WORKS 一覧へ</a>
+                </div>
+
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>ぴたお@AI🤖</p>
+        </div>
+    </footer>
+</body>
+
+</html>

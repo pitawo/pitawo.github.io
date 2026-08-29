@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-labelledby="t">
+  <title id="t">スコアとタイプを大きく示した帯の下に、判定結果の本文と案内ボタンが並ぶ結果ページのイメージ</title>
+
+  <rect width="800" height="500" fill="#fafafb"/>
+
+  <!-- window -->
+  <rect x="40.5" y="40.5" width="719" height="419" rx="4" fill="#ffffff" stroke="#ebebef"/>
+  <line x1="40.5" y1="80.5" x2="759.5" y2="80.5" stroke="#ebebef"/>
+  <circle cx="62" cy="60" r="3.5" fill="#d8d8e0"/>
+  <circle cx="76" cy="60" r="3.5" fill="#d8d8e0"/>
+  <circle cx="90" cy="60" r="3.5" fill="#d8d8e0"/>
+  <rect x="330" y="55" width="140" height="10" rx="2" fill="#f2f3fd"/>
+
+  <!-- タイトル -->
+  <rect x="72" y="104" width="120" height="12" rx="2" fill="#666672"/>
+  <rect x="72" y="126" width="240" height="7" rx="2" fill="#d8d8e0"/>
+
+  <!-- タブ（A / B / C の切り替え） -->
+  <rect x="72.5" y="150.5" width="96" height="24" rx="12" fill="#667eea"/>
+  <rect x="92" y="159" width="58" height="7" rx="2" fill="#ffffff"/>
+  <rect x="178.5" y="150.5" width="96" height="24" rx="12" fill="#ffffff" stroke="#d8d8e0"/>
+  <rect x="198" y="159" width="58" height="7" rx="2" fill="#9a9aa6"/>
+  <rect x="284.5" y="150.5" width="96" height="24" rx="12" fill="#ffffff" stroke="#d8d8e0"/>
+  <rect x="304" y="159" width="58" height="7" rx="2" fill="#9a9aa6"/>
+
+  <!-- 結果カード -->
+  <rect x="72.5" y="194.5" width="655" height="228" rx="4" fill="#ffffff" stroke="#ebebef"/>
+
+  <!-- スコア強調帯 -->
+  <rect x="96.5" y="214.5" width="607" height="56" rx="10" fill="#f2f3fd" stroke="#dcdff8"/>
+  <!-- 「総合スコア」ラベル -->
+  <rect x="214" y="238" width="70" height="8" rx="2" fill="#9a9aa6"/>
+  <!-- 数字（大きく） -->
+  <rect x="296" y="226" width="26" height="32" rx="3" fill="#667eea"/>
+  <!-- 「点」 -->
+  <rect x="330" y="238" width="16" height="8" rx="2" fill="#9a9aa6"/>
+  <!-- 区切り -->
+  <rect x="360" y="234" width="2" height="16" rx="1" fill="#d8d8e0"/>
+  <!-- 「タイプ」ラベル -->
+  <rect x="376" y="238" width="44" height="8" rx="2" fill="#9a9aa6"/>
+  <!-- タイプのピル -->
+  <rect x="430.5" y="230.5" width="44" height="24" rx="12" fill="#ffffff" stroke="#dcdff8"/>
+  <rect x="446" y="239" width="13" height="8" rx="2" fill="#667eea"/>
+
+  <!-- 本文：見出し -->
+  <rect x="96" y="292" width="212" height="11" rx="2" fill="#666672"/>
+
+  <!-- 本文：段落 -->
+  <rect x="96" y="318" width="600" height="7" rx="2" fill="#d8d8e0"/>
+  <rect x="96" y="332" width="548" height="7" rx="2" fill="#d8d8e0"/>
+
+  <!-- 本文：箇条書き3つ -->
+  <circle cx="102" cy="358" r="3" fill="#9a9aa6"/>
+  <rect x="114" y="354" width="418" height="7" rx="2" fill="#d8d8e0"/>
+  <circle cx="102" cy="376" r="3" fill="#9a9aa6"/>
+  <rect x="114" y="372" width="366" height="7" rx="2" fill="#d8d8e0"/>
+  <circle cx="102" cy="394" r="3" fill="#9a9aa6"/>
+  <rect x="114" y="390" width="392" height="7" rx="2" fill="#d8d8e0"/>
+
+  <!-- CTA ボタン -->
+  <rect x="562.5" y="352.5" width="140" height="36" rx="6" fill="#667eea"/>
+  <rect x="592" y="367" width="82" height="8" rx="2" fill="#ffffff"/>
+</svg>

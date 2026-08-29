@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>フォーム回答のスコアリングと結果配信｜デモ</title>
+    <style>
+      :root{
+        --bg:#f6f8fb; --card:#ffffff; --ink:#1f2937; --ink-muted:#6b7280;
+        --brand:#2563eb; --brand-2:#0ea5e9;
+        --line:#e5eaf0; --shadow:0 10px 24px rgba(37,99,235,.10); --radius:16px;
+      }
+      *{box-sizing:border-box}
+      body{
+        margin:0;
+        font-family: system-ui, -apple-system, "Noto Sans JP", Segoe UI, Roboto, sans-serif;
+        color:var(--ink); background:var(--bg); line-height:1.8;
+      }
+      .wrap{max-width:880px;margin:28px auto;padding:16px}
+
+      /* デモである旨の注記 */
+      .notice{
+        background:#fffbeb; border:1px solid #fde68a; border-radius:12px;
+        padding:14px 16px; margin-bottom:20px; font-size:14px; line-height:1.7;
+      }
+      .notice strong{color:#92400e}
+      .notice a{color:var(--brand)}
+
+      .hero{
+        background:#fff; border:1px solid var(--line); border-radius:24px;
+        padding:28px; box-shadow:var(--shadow); display:grid; gap:14px;
+      }
+      h1{margin:0; font-size:clamp(22px,4.5vw,34px); line-height:1.25; font-weight:900}
+      .lead{color:var(--ink-muted); font-size:clamp(14px,2.4vw,16px)}
+      .result-card{
+        background:var(--card); border:1px solid var(--line);
+        border-radius:var(--radius); padding:22px; box-shadow:var(--shadow);
+      }
+      .meta{
+        display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:center;
+        padding:14px 18px; margin:6px 0 12px;
+        border-radius:14px;
+        background:
+          linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.85)),
+          linear-gradient(90deg, var(--brand), var(--brand-2));
+        border:1px solid #cfe0f5;
+        box-shadow:0 10px 30px rgba(37,99,235,.16);
+        font-weight:800; letter-spacing:.02em; line-height:1.3;
+      }
+      .meta .label{opacity:.9}
+      .meta .num{font-size:clamp(28px, 6vw, 40px); font-weight:900; line-height:1; padding:0 6px}
+      .meta .unit{opacity:.9; font-weight:700}
+      .meta .sep{opacity:.5; padding:0 4px}
+      .meta .pill{
+        display:inline-flex; align-items:center; justify-content:center;
+        padding:6px 12px; border-radius:999px;
+        background:#fff; border:1px solid var(--line);
+        box-shadow:0 4px 14px rgba(0,0,0,.05);
+        font-size:clamp(16px, 3.2vw, 18px); font-weight:900; color:var(--brand);
+      }
+      .content{margin-top:10px}
+      .content h2{font-size:20px; margin:0 0 8px}
+      .content ul{padding-left:1.2em}
+      .btn{
+        display:inline-flex; align-items:center; justify-content:center; gap:10px;
+        padding:14px 18px; border-radius:12px; border:1px solid transparent;
+        background:var(--brand); color:#fff; font-weight:800; text-decoration:none;
+        box-shadow:var(--shadow);
+      }
+      .muted{color:var(--ink-muted); font-size:14px}
+
+      /* CSS だけのタブ切り替え（JavaScript を使わない） */
+      .tabs{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:4px}
+      .tabs input{position:absolute; opacity:0; width:0; height:0}
+      .tabs label{
+        cursor:pointer; padding:10px 16px; border-radius:999px;
+        border:1px solid var(--line); background:#fff; font-weight:800;
+        color:var(--ink-muted); font-size:14px;
+      }
+      .panel{display:none}
+      #t-a:checked ~ .tabs label[for="t-a"],
+      #t-b:checked ~ .tabs label[for="t-b"],
+      #t-c:checked ~ .tabs label[for="t-c"]{
+        background:var(--brand); color:#fff; border-color:var(--brand);
+      }
+      #t-a:checked ~ .panels .panel-a,
+      #t-b:checked ~ .panels .panel-b,
+      #t-c:checked ~ .panels .panel-c{display:block}
+
+      .how{
+        margin-top:22px; background:#fff; border:1px solid var(--line);
+        border-radius:var(--radius); padding:20px;
+      }
+      .how h2{font-size:18px; margin:0 0 10px}
+      .how pre{
+        background:#f8fafc; border:1px solid var(--line); border-radius:10px;
+        padding:14px; overflow-x:auto; font-size:13px; line-height:1.6; margin:0;
+      }
+      @media (max-width:520px){ .wrap{padding:12px} }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+
+      <div class="notice">
+        <strong>これはデモです。</strong>
+        Google Apps Script が生成する<strong>結果ページの表示を再現</strong>したものです。実際のツールはフォーム送信をきっかけに動き、スプレッドシートの回答からスコアを算出して、この画面とメールを出し分けます。GAS のウェブアプリは Google アカウント上にデプロイして動くため、そのままの形では触れる状態に置けません。<br>
+        表示されている点数・タイプ・本文の構造は、スクリプトが実際に出力するものと同じです。
+        ソースは <a href="https://github.com/pitawo/gas-form-scoring" target="_blank" rel="noopener">GitHub</a> にあります。
+      </div>
+
+      <input type="radio" name="t" id="t-a" checked hidden>
+      <input type="radio" name="t" id="t-b" hidden>
+      <input type="radio" name="t" id="t-c" hidden>
+
+      <div class="hero">
+        <h1>診断結果</h1>
+        <p class="lead">ご入力のメールアドレスに紐づく結果です。</p>
+
+        <div class="tabs">
+          <label for="t-a">5点 → Aタイプ</label>
+          <label for="t-b">3点 → Bタイプ</label>
+          <label for="t-c">1点 → Cタイプ</label>
+        </div>
+        <p class="muted" style="margin:0">
+          回答内容によってこの3つが自動で切り替わります。上のボタンで表示を確認できます。
+        </p>
+
+        <div class="panels">
+          <!-- A -->
+          <div class="panel panel-a result-card">
+            <p class="meta">
+              <span class="label">総合スコア：</span><span class="num">5</span><span class="unit">点</span>
+              <span class="sep">／</span>
+              <span class="label">タイプ：</span><span class="pill">A</span>
+            </p>
+            <div class="content">
+              <h2>すぐに着手できる状態です</h2>
+              <p>手順が決まっていて、データも扱える形で残っている。この2つが揃っているので、自動化の効果がそのまま出ます。</p>
+              <p><strong>この状態で先に決めておくとよいこと</strong></p>
+              <ul>
+                <li>どの作業から自動化するか（頻度 × 1回あたりの時間で選ぶ）</li>
+                <li>失敗したときに手作業へ戻せる導線を残すか</li>
+                <li>作った後、誰が直せる状態にしておくか</li>
+              </ul>
+              <p>作ること自体より、運用が続く形にすることのほうが難しくなります。</p>
+            </div>
+            <div style="margin-top:16px"><a class="btn" href="#" onclick="return false">詳しいご案内を見る</a></div>
+            <p class="muted" style="margin-top:10px;">このページのURLを保管すると、いつでも結果を確認できます。</p>
+          </div>
+
+          <!-- B -->
+          <div class="panel panel-b result-card">
+            <p class="meta">
+              <span class="label">総合スコア：</span><span class="num">3</span><span class="unit">点</span>
+              <span class="sep">／</span>
+              <span class="label">タイプ：</span><span class="pill">B</span>
+            </p>
+            <div class="content">
+              <h2>整理すれば効果が出ます</h2>
+              <p>自動化する余地は十分にあります。ただ、手順やデータの形が固まりきっていないため、先に整理したほうが結果的に早く進みます。</p>
+              <p><strong>先に手をつけるとよいところ</strong></p>
+              <ul>
+                <li>手順を書き出して、例外がどこで起きるかを洗い出す</li>
+                <li>データの置き場所を1つにまとめる</li>
+                <li>まず1工程だけ自動化して、効果を測る</li>
+              </ul>
+              <p>全部を一度に変えようとすると、たいてい途中で止まります。</p>
+            </div>
+            <div style="margin-top:16px"><a class="btn" href="#" onclick="return false">詳しいご案内を見る</a></div>
+            <p class="muted" style="margin-top:10px;">このページのURLを保管すると、いつでも結果を確認できます。</p>
+          </div>
+
+          <!-- C -->
+          <div class="panel panel-c result-card">
+            <p class="meta">
+              <span class="label">総合スコア：</span><span class="num">1</span><span class="unit">点</span>
+              <span class="sep">／</span>
+              <span class="label">タイプ：</span><span class="pill">C</span>
+            </p>
+            <div class="content">
+              <h2>まず現状を測るところから</h2>
+              <p>いきなりツールを入れるより、どの作業にどれだけ時間がかかっているかを把握するほうが先です。ここを飛ばすと、効果の薄いところを自動化してしまいます。</p>
+              <p><strong>最初の一歩</strong></p>
+              <ul>
+                <li>1週間、作業と所要時間を記録する</li>
+                <li>「毎回同じ」と「毎回違う」を分ける</li>
+                <li>同じもののうち、最も回数が多いものを1つ選ぶ</li>
+              </ul>
+              <p>測ってから決めるほうが、結局は近道になります。</p>
+            </div>
+            <div style="margin-top:16px"><a class="btn" href="#" onclick="return false">詳しいご案内を見る</a></div>
+            <p class="muted" style="margin-top:10px;">このページのURLを保管すると、いつでも結果を確認できます。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="how">
+        <h2>この画面が出るまでに何が起きているか</h2>
+        <pre>フォーム送信
+   ↓  onFormSubmit（インストール型トリガー）
+スプレッドシートに回答が記録される
+   ↓
+Yes/No 設問を集計してスコアを算出（0〜5点）
+   ↓
+スコアからタイプを判定（A / B / C）
+   ↓
+メタ列に書き込み（Score / Type / Token / ResultURL）
+   ↓
+タイプ別の内容でメールを送信
+   ↓
+この結果ページ（固定URL）でいつでも再表示</pre>
+        <p class="muted" style="margin-top:12px">
+          結果ページの入り口は2つあります。メールに載せたトークン付きURLと、メールアドレスの入力。
+          後者は <code>+エイリアス</code> とドット表記を正規化してから照合するため、
+          <code>taro+form@gmail.com</code> で送信して <code>taro@gmail.com</code> で検索しても同じ結果に辿り着きます。
+        </p>
+      </div>
+
+    </div>
+  </body>
+</html>
