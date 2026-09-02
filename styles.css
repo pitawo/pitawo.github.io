@@ -41,6 +41,11 @@
     box-sizing: border-box;
 }
 
+/* JS が付ける矢印・ドットは上乗せなので、無効時は確実に隠す */
+[hidden] {
+    display: none !important;
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -162,6 +167,24 @@ section {
     margin-bottom: 0;
 }
 
+/* ---------- about ---------- */
+
+.about-body {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.75rem;
+}
+
+.about-mark {
+    flex-shrink: 0;
+}
+
+.about-mark img {
+    display: block;
+    width: 56px;
+    height: 56px;
+}
+
 /* ---------- hero ---------- */
 
 #hero {
@@ -250,6 +273,170 @@ section {
     object-fit: cover;
 }
 
+/* ---------- works carousel（トップの代表3件） ---------- */
+
+.works-carousel {
+    display: flex;
+    align-items: stretch;
+    gap: 1rem;
+}
+
+.works-track {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* ネイティブのスクロールバーは隠す。スクロール自体はホイール／指のドラッグで生きたまま（矢印・ドットが「続きがある」ことを示す） */
+}
+
+.works-track::-webkit-scrollbar {
+    display: none;
+}
+
+.work-card {
+    /* カード幅を1枚ぶんより少し狭くし、右端に次カードの頭を覗かせる（peek）。
+       gap 1.5rem を引いた差分がそのまま覗く幅になる：3.5rem - 1.5rem = 2rem(32px) */
+    flex: 0 0 calc(100% - 3.5rem);
+    scroll-snap-align: start;
+}
+
+/* カード全体はリンクにしない（内側のスライドにドットを置くため）。
+   クリックできるのはタイトルと「詳しく見る」だけ。2026-09-02 改訂・Taka 指摘 */
+.work-card-panel {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background-color: var(--bg);
+}
+
+.work-card-panel .work-body {
+    padding: 1.5rem;
+}
+
+/* 矢印を押して動かす。JS 無効時は hidden のまま（overflow-x: auto ＋ scroll-snap が土台） */
+.carousel-arrow {
+    flex-shrink: 0;
+    align-self: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    background-color: var(--bg);
+    color: var(--text);
+    cursor: pointer;
+    transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.carousel-arrow:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.carousel-arrow--prev svg {
+    transform: rotate(180deg);
+}
+
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+}
+
+.carousel-dot {
+    width: 20px;
+    height: 2px;
+    padding: 0;
+    border: none;
+    background-color: var(--line-strong);
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.carousel-dot:hover {
+    background-color: var(--accent);
+}
+
+.carousel-dot[aria-current="true"] {
+    background-color: var(--accent);
+}
+
+.works-more {
+    margin-top: 2.5rem;
+}
+
+/* スクリーンショットのスライド（各カード内・3枚）。矢印は付けず、ホイールと指のドラッグで見る */
+.work-shots {
+    aspect-ratio: 8 / 5;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    background-color: var(--bg-alt);
+    border-bottom: 1px solid var(--line);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.work-shots::-webkit-scrollbar {
+    display: none;
+}
+
+.work-shots-track {
+    display: flex;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.work-shots-track li {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+}
+
+.work-shots img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 何枚あるか分かるようにする、だけが目的。JS 無効時は hidden のまま */
+.shots-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.6rem 0;
+    background-color: var(--bg-alt);
+}
+
+.shots-dot {
+    width: 14px;
+    height: 2px;
+    padding: 0;
+    border: none;
+    background-color: var(--line-strong);
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.shots-dot:hover {
+    background-color: var(--accent);
+}
+
+.shots-dot[aria-current="true"] {
+    background-color: var(--accent);
+}
+
 .work-category {
     display: block;
     margin-bottom: 0.35rem;
@@ -278,6 +465,16 @@ section {
     color: var(--accent);
 }
 
+/* カルーセルカードのタイトルは h3 の中の a がリンク（カード全体はリンクにしない） */
+.work-head h3 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.work-head h3 a:hover {
+    color: var(--accent);
+}
+
 .work-date {
     flex-shrink: 0;
     font-size: 0.78rem;
@@ -288,6 +485,20 @@ section {
 .work-desc {
     margin: 0 0 1rem;
     font-size: 0.92rem;
+}
+
+.work-more {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-soft);
+    transition: border-color 0.15s ease;
+}
+
+.work-more:hover {
+    border-color: var(--accent);
 }
 
 /* ---------- tags ---------- */
@@ -545,16 +756,6 @@ code {
     margin-bottom: 0;
 }
 
-.detail-foot {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    align-items: center;
-    margin-top: 3.5rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--line);
-}
-
 .button {
     display: inline-block;
     padding: 0.6rem 1.2rem;
@@ -585,7 +786,6 @@ code {
 }
 
 .back-link {
-    margin-left: auto;
     font-size: 0.85rem;
     color: var(--muted);
     text-decoration: none;
@@ -594,6 +794,26 @@ code {
 
 .back-link:hover {
     color: var(--accent);
+}
+
+/* 詳細ページ最上部の「← WORKS 一覧へ」 */
+.detail-back {
+    margin: 0 0 1.5rem;
+}
+
+/* デモ・GitHub のボタン（本文より上に置く。2026-09-02 改訂） */
+.detail-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    margin: 1.75rem 0 0;
+}
+
+.detail-note {
+    margin: 0.9rem 0 0;
+    font-size: 0.82rem;
+    color: var(--muted);
 }
 
 /* ---------- responsive ---------- */
@@ -637,12 +857,17 @@ code {
         gap: 0.15rem;
     }
 
-    .detail-foot {
+    .about-body {
         flex-direction: column;
-        align-items: flex-start;
+        gap: 1.25rem;
     }
 
-    .back-link {
-        margin-left: 0;
+    .works-carousel {
+        gap: 0.6rem;
+    }
+
+    .carousel-arrow {
+        width: 2.25rem;
+        height: 2.25rem;
     }
 }

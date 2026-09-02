@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ぴたお@AI🤖 - Portfolio</title>
     <meta name="description"
-        content="今日も AI と何か作ってる。Claude Code・ChatGPT・Gemini を毎日横断して作ったものと、そのとき詰まったことを置いています。">
+        content="アイデアを、AIとカタチに。Claude Code を相棒に、Webアプリや業務ツールを実際に動くカタチまで組み上げました。">
     <meta property="og:title" content="ぴたお@AI🤖 - Portfolio">
     <meta property="og:description"
-        content="今日も AI と何か作ってる。Claude Code・ChatGPT・Gemini を毎日横断して作ったものと、そのとき詰まったことを置いています。">
+        content="アイデアを、AIとカタチに。Claude Code を相棒に、Webアプリや業務ツールを実際に動くカタチまで組み上げました。">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="https://fav.farm/✨" />
@@ -17,6 +17,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="main.js" defer></script>
 </head>
 
 <body>
@@ -24,6 +25,7 @@
         <nav class="navbar">
             <a href="/" class="wordmark">ぴたお@AI🤖</a>
             <ul class="nav-links">
+                <li><a href="#hero">TOP</a></li>
                 <li><a href="#works">WORKS</a></li>
                 <li><a href="#about">ABOUT</a></li>
                 <li><a href="#contact">CONTACT</a></li>
@@ -34,8 +36,8 @@
     <main>
         <section id="hero">
             <div class="container">
-                <h1>今日も AI と何か作ってる。</h1>
-                <p class="lead">Claude Code・ChatGPT・Gemini を毎日横断。作ったものと、そのとき<span class="mark">詰まったこと</span>を置いています。</p>
+                <h1>アイデアを、AIと<span class="mark">カタチ</span>に。</h1>
+                <p class="lead">Claude Code を相棒に、Webアプリや業務ツールを実際に動くカタチまで組み上げました。</p>
             </div>
         </section>
 
@@ -43,187 +45,140 @@
             <div class="container">
                 <h2 class="section-title">WORKS</h2>
 
-                <!-- 実績は source/works/*.md から生成される。HTML を直接編集しない -->
-                <ul class="works-list">
-                    <li>
-                        <a href="works/gas-form-scoring.html" class="work-link">
-                            <div class="work-thumb">
-                                <img src="Image/works/gas-form-scoring.svg" alt="スコアとタイプを大きく示した帯の下に、判定結果の本文と案内ボタンが並ぶ結果ページのイメージ">
-                            </div>
-                            <div class="work-body">
-                                <span class="work-category">Tool</span>
-                                <div class="work-head">
-                                    <h3>フォーム回答のスコアリングと結果配信</h3>
-                                    <span class="work-date">2026-08</span>
+                <!-- 代表3件。全件は works/index.html。source/works/*.md から生成される -->
+                <div class="works-carousel" data-carousel>
+                    <button type="button" class="carousel-arrow carousel-arrow--prev" data-carousel-prev hidden
+                        aria-label="前の作品を表示">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                            <path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </button>
+
+                    <ul class="works-track" data-carousel-track>
+                        <li class="work-card">
+                            <div class="work-card-panel">
+                                <div class="work-shots" data-shots>
+                                    <ul class="work-shots-track" data-shots-track>
+                                        <li><img src="Image/works/shots/gas-form-scoring-1.webp"
+                                                alt="総合スコア5点・Aタイプと判定された診断結果ページ。判定に続けて、その状態でまず決めることが3つ並んでいる"
+                                                loading="lazy" width="1117" height="698"></li>
+                                        <li><img src="Image/works/shots/gas-form-scoring-2.webp"
+                                                alt="同じページを3点・Bタイプに切り替えたところ。スコアに応じて見出しと本文がまるごと入れ替わっている"
+                                                loading="lazy" width="1117" height="698"></li>
+                                        <li><img src="Image/works/shots/gas-form-scoring-3.webp"
+                                                alt="フォーム送信からスプレッドシートへの記録、スコア算出、タイプ判定、メール送信までの処理の流れを矢印でつないだ図"
+                                                loading="lazy" width="1117" height="698"></li>
+                                    </ul>
                                 </div>
-                                <p class="work-desc">フォームの回答を自動でスコア化し、判定タイプごとに内容を変えてメールを送る。結果はあとから再表示できる。</p>
-                                <ul class="tags">
-                                    <li class="tag">Google Apps Script</li>
-                                    <li class="tag">JavaScript</li>
-                                    <li class="tag">Google Workspace</li>
-                                </ul>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="works/cafe-site.html" class="work-link">
-                            <div class="work-thumb">
-                                <img src="Image/works/cafe-site.svg" alt="左に注文明細と金額の内訳、右にカード情報の入力欄が並んだ決済画面のイメージ">
-                            </div>
-                            <div class="work-body">
-                                <span class="work-category">Web App</span>
-                                <div class="work-head">
-                                    <h3>カフェの注文サイト</h3>
-                                    <span class="work-date">2026-08</span>
+                                <div class="shots-dots" data-shots-dots hidden></div>
+                                <div class="work-body">
+                                    <span class="work-category">Tool</span>
+                                    <div class="work-head">
+                                        <h3><a href="works/gas-form-scoring.html">フォーム回答のスコアリングと結果配信</a></h3>
+                                        <span class="work-date">2026-08</span>
+                                    </div>
+                                    <p class="work-desc">フォームの回答を自動でスコア化し、判定タイプごとに内容を変えてメールを送る。結果はあとから再表示できる。</p>
+                                    <ul class="tags">
+                                        <li class="tag">Google Apps Script</li>
+                                        <li class="tag">JavaScript</li>
+                                        <li class="tag">Google Workspace</li>
+                                    </ul>
+                                    <a href="works/gas-form-scoring.html" class="work-more">詳しく見る →</a>
                                 </div>
-                                <p class="work-desc">商品を選んでカートに入れ、決済画面を経て注文完了まで進めるカフェの注文サイト。</p>
-                                <ul class="tags">
-                                    <li class="tag">React</li>
-                                    <li class="tag">Vite</li>
-                                    <li class="tag">React Router</li>
-                                    <li class="tag">Vitest</li>
-                                </ul>
                             </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="works/equipment-ledger.html" class="work-link">
-                            <div class="work-thumb">
-                                <img src="Image/works/equipment-ledger.svg" alt="左に予約フォーム、右に備品の稼働状況カードが並んだ画面のイメージ">
-                            </div>
-                            <div class="work-body">
-                                <span class="work-category">Web App</span>
-                                <div class="work-head">
-                                    <h3>備品貸出管理アプリ</h3>
-                                    <span class="work-date">2026-08</span>
+                        </li>
+                        <li class="work-card">
+                            <div class="work-card-panel">
+                                <div class="work-shots" data-shots>
+                                    <ul class="work-shots-track" data-shots-track>
+                                        <li><img src="Image/works/shots/cafe-site-1.webp" alt="メニュー画面。ドリンク6品にサイズ（S / M / L）の選択ボタンが並んでいる"
+                                                loading="lazy" width="1117" height="698"></li>
+                                        <li><img src="Image/works/shots/cafe-site-2.webp" alt="決済画面。注文明細と小計・消費税・合計が並び、上にデモであることの注記が出ている"
+                                                loading="lazy" width="1117" height="698"></li>
+                                        <li><img src="Image/works/shots/cafe-site-3.webp" alt="注文完了画面。受付番号・受け取り方法・支払い金額が表示されている"
+                                                loading="lazy" width="1117" height="698"></li>
+                                    </ul>
                                 </div>
-                                <p class="work-desc">カメラや機材の貸出・返却・予約をブラウザで管理するツール。予約が残っている備品は削除できない。</p>
-                                <ul class="tags">
-                                    <li class="tag">Python</li>
-                                    <li class="tag">Flask</li>
-                                    <li class="tag">Socket.IO</li>
-                                    <li class="tag">Claude Code</li>
-                                </ul>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="works/company-research.html" class="work-link">
-                            <div class="work-thumb">
-                                <img src="Image/works/company-research.svg" alt="財務指標のカードと業績の折れ線グラフ、注記が並んだ画面のイメージ">
-                            </div>
-                            <div class="work-body">
-                                <span class="work-category">Tool</span>
-                                <div class="work-head">
-                                    <h3>企業リサーチシステム</h3>
-                                    <span class="work-date">2026-08</span>
+                                <div class="shots-dots" data-shots-dots hidden></div>
+                                <div class="work-body">
+                                    <span class="work-category">Web App</span>
+                                    <div class="work-head">
+                                        <h3><a href="works/cafe-site.html">カフェの注文サイト</a></h3>
+                                        <span class="work-date">2026-08</span>
+                                    </div>
+                                    <p class="work-desc">商品を選んでカートに入れ、決済画面を経て注文完了まで進めるカフェの注文サイト。</p>
+                                    <ul class="tags">
+                                        <li class="tag">React</li>
+                                        <li class="tag">Vite</li>
+                                        <li class="tag">React Router</li>
+                                        <li class="tag">Vitest</li>
+                                    </ul>
+                                    <a href="works/cafe-site.html" class="work-more">詳しく見る →</a>
                                 </div>
-                                <p class="work-desc">上場企業の財務データを取得して可視化するツール。決算期の飛びや非継続事業を検出して注記を出す。</p>
-                                <ul class="tags">
-                                    <li class="tag">Python</li>
-                                    <li class="tag">Streamlit</li>
-                                    <li class="tag">yfinance</li>
-                                    <li class="tag">Plotly</li>
-                                    <li class="tag">Claude Code</li>
-                                </ul>
                             </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="works/youtube-research.html" class="work-link">
-                            <div class="work-thumb">
-                                <img src="Image/works/youtube-research.svg" alt="URL 入力欄の下に再生回数などの統計カードとグラフが並んだ画面のイメージ">
-                            </div>
-                            <div class="work-body">
-                                <span class="work-category">Tool</span>
-                                <div class="work-head">
-                                    <h3>YouTube リサーチシステム</h3>
-                                    <span class="work-date">2026-08</span>
+                        </li>
+                        <li class="work-card">
+                            <div class="work-card-panel">
+                                <div class="work-shots" data-shots>
+                                    <ul class="work-shots-track" data-shots-track>
+                                        <li><img src="Image/works/shots/secretary-app-1.webp"
+                                                alt="メモ・タスク・完了件数・振り返りの件数を並べた上部と、最新の週次振り返りが表示された画面"
+                                                loading="lazy" width="1117" height="698"></li>
+                                        <li><img src="Image/works/shots/secretary-app-2.webp"
+                                                alt="左にメモの一覧、右にタスクの一覧が並び、それぞれ編集と削除のボタンが付いている" loading="lazy" width="1117" height="698"></li>
+                                        <li><img src="Image/works/shots/secretary-app-3.webp"
+                                                alt="週次の振り返りの入力欄と、記録済みの週のコメントが下に並んでいる"
+                                                loading="lazy" width="1117" height="698"></li>
+                                    </ul>
                                 </div>
-                                <p class="work-desc">URL を貼るだけで動画とチャンネルの数字を並べて見られるツール。API キーは画面から入力する方式。</p>
-                                <ul class="tags">
-                                    <li class="tag">Python</li>
-                                    <li class="tag">Streamlit</li>
-                                    <li class="tag">YouTube Data API v3</li>
-                                    <li class="tag">SQLite</li>
-                                    <li class="tag">Claude Code</li>
-                                </ul>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="works/pdf-toolkit.html" class="work-link">
-                            <div class="work-thumb">
-                                <img src="Image/works/pdf-toolkit.svg" alt="左にアップロードしたファイルの一覧、右に変換オプションが並んだ画面のイメージ">
-                            </div>
-                            <div class="work-body">
-                                <span class="work-category">Tool</span>
-                                <div class="work-head">
-                                    <h3>PDF 変換・結合ツール</h3>
-                                    <span class="work-date">2026-08</span>
+                                <div class="shots-dots" data-shots-dots hidden></div>
+                                <div class="work-body">
+                                    <span class="work-category">Web App</span>
+                                    <div class="work-head">
+                                        <h3><a href="works/secretary-app.html">自分専用の秘書アプリ</a></h3>
+                                        <span class="work-date">2026-08</span>
+                                    </div>
+                                    <p class="work-desc">メモ・タスク・週次の振り返りを1画面で扱う自分用ツール。</p>
+                                    <ul class="tags">
+                                        <li class="tag">Node.js</li>
+                                        <li class="tag">HTML / CSS / JavaScript</li>
+                                        <li class="tag">Claude Code</li>
+                                    </ul>
+                                    <a href="works/secretary-app.html" class="work-more">詳しく見る →</a>
                                 </div>
-                                <p class="work-desc">画像や Office 文書を PDF に変換し、結合とページ番号付けまでブラウザ上で終わらせるツール。</p>
-                                <ul class="tags">
-                                    <li class="tag">Python</li>
-                                    <li class="tag">Streamlit</li>
-                                    <li class="tag">PyPDF2</li>
-                                    <li class="tag">LibreOffice</li>
-                                    <li class="tag">Claude Code</li>
-                                </ul>
                             </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="works/course-platform.html" class="work-link">
-                            <div class="work-thumb">
-                                <img src="Image/works/course-platform.svg" alt="動画講座配信プラットフォームの画面イメージ">
-                            </div>
-                            <div class="work-body">
-                                <span class="work-category">Web App</span>
-                                <div class="work-head">
-                                    <h3>動画講座配信プラットフォーム</h3>
-                                    <span class="work-date">2026-08</span>
-                                </div>
-                                <p class="work-desc">Google ログインとレッスン単位の進捗管理を備えた、動画講座を配信するための自作プラットフォーム。</p>
-                                <ul class="tags">
-                                    <li class="tag">Next.js</li>
-                                    <li class="tag">Drizzle ORM</li>
-                                    <li class="tag">Better Auth</li>
-                                    <li class="tag">Claude Code</li>
-                                </ul>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="works/secretary-app.html" class="work-link">
-                            <div class="work-thumb">
-                                <img src="Image/works/secretary-app.svg" alt="自分専用の秘書アプリの画面イメージ">
-                            </div>
-                            <div class="work-body">
-                                <span class="work-category">Web App</span>
-                                <div class="work-head">
-                                    <h3>自分専用の秘書アプリ</h3>
-                                    <span class="work-date">2026-08</span>
-                                </div>
-                                <p class="work-desc">メモ・タスク・週次の振り返りを1画面で扱う自分用ツール。外部ライブラリを使わず Node.js の標準機能だけで作った。</p>
-                                <ul class="tags">
-                                    <li class="tag">Node.js</li>
-                                    <li class="tag">HTML / CSS / JavaScript</li>
-                                    <li class="tag">Claude Code</li>
-                                </ul>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
+                        </li>
+                    </ul>
+
+                    <button type="button" class="carousel-arrow carousel-arrow--next" data-carousel-next hidden
+                        aria-label="次の作品を表示">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                            <path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="carousel-dots" data-carousel-dots hidden></div>
+
+                <div class="works-more">
+                    <a href="works/index.html" class="button">すべての実績を見る（8件）</a>
+                </div>
             </div>
         </section>
 
         <section id="about">
             <div class="container">
                 <h2 class="section-title">ABOUT</h2>
-                <div class="prose">
-                    <p>ぴたお@AI🤖。Claude Code・ChatGPT・Gemini を毎日横断して使っています。単一のツールに寄らず、何がどれに向いているかを実際に使って確かめています。</p>
-                    <p>資格の学習ログや AI ニュースの考察は <a href="https://note.com/pitawo" target="_blank" rel="noopener">note</a> に、作ったものはここに置いています。</p>
+                <div class="about-body">
+                    <div class="about-mark">
+                        <img src="Image/profile-mark.svg" alt="" width="56" height="56">
+                    </div>
+                    <div class="prose">
+                        <p>ぴたお@AI🤖です。Claude Code・ChatGPT・Gemini を毎日使い分けています。ツールごとの得意不得意は、実際に使って比べてみないと分からないと思っています。</p>
+                        <p>作ったものは、完成品だけを並べていません。なぜ作ったのか、どこで詰まったのか、どう直したのかまで含めて残しています。情報は複製できても、実際に詰まった過程までは複製できないと考えているからです。</p>
+                    </div>
                 </div>
             </div>
         </section>

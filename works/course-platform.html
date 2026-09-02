@@ -22,6 +22,7 @@
         <nav class="navbar">
             <a href="../index.html" class="wordmark">ぴたお@AI🤖</a>
             <ul class="nav-links">
+                <li><a href="../index.html">TOP</a></li>
                 <li><a href="../index.html#works">WORKS</a></li>
                 <li><a href="../index.html#about">ABOUT</a></li>
                 <li><a href="../index.html#contact">CONTACT</a></li>
@@ -32,12 +33,17 @@
     <main>
         <section class="detail-hero">
             <div class="container">
+                <p class="detail-back"><a href="index.html" class="back-link">← WORKS 一覧へ</a></p>
                 <h1>動画講座配信プラットフォーム</h1>
                 <p class="detail-meta">
                     <span>2026-08</span>
                     <span>Next.js / Drizzle ORM / Better Auth</span>
                     <span>Claude Code</span>
                 </p>
+                <div class="detail-actions">
+                    <a href="https://my-own-video-platform-lime-tau.vercel.app" target="_blank" rel="noopener"
+                        class="button button-primary">サイトを見る</a>
+                </div>
                 <figure class="detail-figure">
                     <img src="../Image/works/course-platform.svg" alt="Google ログインと進捗管理を備えた動画講座配信サイトの画面イメージ">
                 </figure>
@@ -48,8 +54,8 @@
             <div class="container">
 
                 <h2>なぜ作ったか</h2>
-                <p>以前作った秘書アプリは、ブラウザとローカルのサーバーだけで完結する個人用ツールでした。次は、ログイン・データベース・本番デプロイまで含めて、誰かがブラウザから触れる形のアプリを一人で作りきることを目標にしました。</p>
-                <p>題材には、自分が G検定の学習でまとめていた「AI の歴史」を選びました。人工知能の定義から、ブームと冬の時代が繰り返されてきた流れまでを、レッスン単位で並べて見返せる形にしています。</p>
+                <p>以前作った秘書アプリは、ブラウザとローカルのサーバーだけで完結する個人用ツールでした。次は、ログイン・データベース・本番デプロイまで含めて、<strong>誰かがブラウザから触れる形のアプリを一人で作りきる</strong>ことを目標にしました。</p>
+                <p>題材には、以前まとめていた「AI の歴史」を選びました。人工知能の定義から、ブームと冬の時代が繰り返されてきた流れまでを、レッスン単位で並べて見返せる形にしています。</p>
 
                 <h2>どう作ったか</h2>
                 <p>構成は Next.js（フロントエンドと API）・Drizzle ORM・Turso（本番データベース）・Better Auth（メール＋パスワードと Google ログイン）・Vercel Blob（サムネイル画像）です。開発中はローカルの SQLite に向けて作り、公開の直前に接続先を本番のデータベースへ切り替えました。</p>
@@ -83,13 +89,9 @@
 
                 <h2>公開について</h2>
                 <p>本番で公開中です。ログインしなくても講座一覧とレッスンの内容は見られ、Google ログインで受講と進捗の記録ができます。</p>
+                <p>ログイン画面には「登録せずにデモを見る」ボタンも用意しました。Google アカウントが無くても、受講登録から進捗の記録まで一通り試せます。共通の1つのデモアカウントで動いていて、入るたびに前回までの記録を消してから始まるので、他の見学者の続きが残っていることはありません。ログイン中の Google アカウントなど、他の利用者のデータには影響しません。</p>
                 <p><strong>現状、レッスン動画は10本中1本のみ公開済みで、残り9本は制作中です。</strong>音声つきの解説動画は、資料を読み込ませると音声解説付きの動画にしてくれる NotebookLM で作っています。動画ができ次第、管理画面から順に差し替えていきます。</p>
-
-                <div class="detail-foot">
-                    <a href="https://my-own-video-platform-lime-tau.vercel.app" target="_blank" rel="noopener"
-                        class="button button-primary">サイトを見る</a>
-                    <a href="../index.html#works" class="back-link">← WORKS 一覧へ</a>
-                </div>
+                <p>サムネイル画像も自作の SVG イラストで用意しました。それまでは「No Image」の灰色のブロックが画面の大半を占めていました。</p>
 
             </div>
         </article>

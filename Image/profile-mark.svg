@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="profileMarkTitle">
+  <title id="profileMarkTitle">ぴたお@AI🤖 の抽象マーク</title>
+  <rect x="1.5" y="1.5" width="61" height="61" rx="4" fill="#fafafb" stroke="#ebebef"/>
+  <path d="M20 22 L30 32 L20 42" fill="none" stroke="#667eea" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="36" y1="42" x2="46" y2="42" stroke="#764ba2" stroke-width="3" stroke-linecap="round"/>
+</svg>

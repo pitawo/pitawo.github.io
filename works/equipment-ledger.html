@@ -22,6 +22,7 @@
         <nav class="navbar">
             <a href="../index.html" class="wordmark">ぴたお@AI🤖</a>
             <ul class="nav-links">
+                <li><a href="../index.html">TOP</a></li>
                 <li><a href="../index.html#works">WORKS</a></li>
                 <li><a href="../index.html#about">ABOUT</a></li>
                 <li><a href="../index.html#contact">CONTACT</a></li>
@@ -32,6 +33,7 @@
     <main>
         <section class="detail-hero">
             <div class="container">
+                <p class="detail-back"><a href="index.html" class="back-link">← WORKS 一覧へ</a></p>
                 <h1>備品貸出管理アプリ</h1>
                 <p class="detail-meta">
                     <span>2026-08</span>
@@ -39,6 +41,13 @@
                     <span>Socket.IO</span>
                     <span>Claude Code</span>
                 </p>
+                <div class="detail-actions">
+                    <a href="https://equipment-ledger.onrender.com/" target="_blank" rel="noopener"
+                        class="button button-primary">デモを触る</a>
+                    <a href="https://github.com/pitawo/equipment-ledger" target="_blank" rel="noopener"
+                        class="button">GitHub で見る</a>
+                </div>
+                <p class="detail-note">無料枠でスリープします。起動まで数分かかることがあります。</p>
                 <figure class="detail-figure">
                     <img src="../Image/works/equipment-ledger.svg" alt="左に予約フォーム、右に備品の稼働状況カードが並んだ画面のイメージ">
                 </figure>
@@ -61,6 +70,7 @@
                     <li>稼働状況 — 利用可能／貸出中を一覧表示。予約は「利用中／これからの予約／終了済み」に分かれる</li>
                     <li>備品マスター — 追加・改名・削除</li>
                     <li>ログイン — メールとパスワード。パスワードはハッシュ化して保存する</li>
+                    <li>見た目 — 備品ごとに、名前から判定した線画アイコンを表示する。当てはまる名前が無ければ共通のアイコンになる</li>
                 </ul>
 
                 <h2>詰まった点と、直したこと</h2>
@@ -92,7 +102,9 @@
                     <div class="issue">
                         <h3>登録しないと何も見えない</h3>
                         <p>公開して気づきました。訪問者が最初に見るのはログイン画面で、アカウントを作らないと中身が分かりません。</p>
-                        <p>「登録せずにデモを見る」を追加しました。見学用の利用者はいなければその場で作られるので、サーバーが再起動しても入れます。</p>
+                        <p>「登録せずにデモを見る」ボタンを追加しました。ログインフォームを何も入力せずに送っても、同じ入口に入れるようにしています。画面右上には「デモとして閲覧中」の表示を常に出し、本物のログインと見分けられるようにしました。</p>
+                        <p>ここでもう1つ、<strong>公開するアプリで、触らせたいけど壊されたくない</strong>という問題にぶつかりました。見学者にも予約や返却を実際に操作してもらいたいものの、誰かの本物の予約データを見学者が消せてしまっては困ります。</p>
+                        <p>見学者が来るたびに、その人専用の使い捨てのデータ置き場をサーバー上に作り、そこにサンプルデータを渡すことにしました。見学者の操作はその置き場の中だけで完結し、保存も他の利用者への通知もしません。本物のデータには、見学者の操作が一切届かない構造にしました。</p>
                     </div>
                 </div>
 
@@ -103,14 +115,6 @@
                 <h2>公開について</h2>
                 <p>Render の無料枠で公開しています。しばらくアクセスがないとスリープするため、最初の表示に時間がかかることがあります。</p>
                 <p><strong>永続ディスクを付けていないので、再起動すると入力したデータは初期状態に戻ります。</strong>見学で触ってもらう分にはそのほうが都合がよいと判断しました。</p>
-
-                <div class="detail-foot">
-                    <a href="https://equipment-ledger.onrender.com/" target="_blank" rel="noopener"
-                        class="button button-primary">デモを触る</a>
-                    <a href="https://github.com/pitawo/equipment-ledger" target="_blank" rel="noopener"
-                        class="button">GitHub で見る</a>
-                    <a href="../index.html#works" class="back-link">← WORKS 一覧へ</a>
-                </div>
 
             </div>
         </article>
