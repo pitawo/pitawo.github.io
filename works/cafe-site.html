@@ -22,6 +22,7 @@
         <nav class="navbar">
             <a href="../index.html" class="wordmark">ぴたお@AI🤖</a>
             <ul class="nav-links">
+                <li><a href="../index.html">TOP</a></li>
                 <li><a href="../index.html#works">WORKS</a></li>
                 <li><a href="../index.html#about">ABOUT</a></li>
                 <li><a href="../index.html#contact">CONTACT</a></li>
@@ -32,12 +33,18 @@
     <main>
         <section class="detail-hero">
             <div class="container">
+                <p class="detail-back"><a href="index.html" class="back-link">← WORKS 一覧へ</a></p>
                 <h1>カフェの注文サイト</h1>
                 <p class="detail-meta">
                     <span>2026-08</span>
                     <span>React / Vite</span>
                     <span>React Router / Vitest</span>
                 </p>
+                <div class="detail-actions">
+                    <a href="../demo/cafe-site/" class="button button-primary">デモを触る</a>
+                    <a href="https://github.com/pitawo/cafe-site" target="_blank" rel="noopener"
+                        class="button">GitHub で見る</a>
+                </div>
                 <figure class="detail-figure">
                     <img src="../Image/works/cafe-site.webp" alt="注文明細と金額の内訳、受け取り方法の入力欄が並んだ決済画面">
                     <figcaption>公開しているデモの決済画面</figcaption>
@@ -50,10 +57,11 @@
 
                 <h2>なぜ作ったか</h2>
                 <p>買い物のサイトは、見た目を作るところまでは早いです。難しいのはその先で、<strong>カートの中身を持ち回り、金額を計算し、決済画面まで途切れずにつなぐ</strong>ところに手間がかかります。</p>
-                <p>作りかけで止まっているものが手元にあったので、注文から決済まで一本の流れとして通せる状態にしました。</p>
+                <p>作りかけで止まっているものが手元にあったので、<strong>注文から決済まで一本の流れとして通せる状態</strong>にしました。</p>
 
                 <h2>どう作ったか</h2>
-                <p>React と Vite。画面は6つ（トップ・メニュー・カート・決済・完了・サインイン）で、React Router で切り替えます。カートの状態は Context にまとめ、金額の計算もそこに置きました。</p>
+                <p>React と Vite。画面は6つ（トップ・メニュー・カート・決済・完了・サインイン）で、React Router で切り替えます。表示は日本語、金額は円に統一しました。触りに来た人がそのまま読めるようにするためです。</p>
+                <p>カートの状態は Context にまとめ、金額の計算もそこに置きました。</p>
 
                 <div class="table-wrap">
                     <table>
@@ -63,15 +71,38 @@
                         <tbody>
                             <tr><td>小計</td><td>単価 × 数量の合計</td></tr>
                             <tr><td>消費税</td><td>小計の 10%</td></tr>
-                            <tr><td>配送料</td><td>店頭受け取りは無料、配達は $3.00</td></tr>
+                            <tr><td>配送料</td><td>店頭受け取りは無料、配達は ¥300</td></tr>
                         </tbody>
                     </table>
                 </div>
 
-                <p>受け取り方法を切り替えると合計が変わります。</p>
+                <p>受け取り方法を切り替えると合計が変わります。ドリンクには S / M / L のサイズも足しました。M は +¥50、L は +¥100 で、選んだサイズの差額はカート・小計・合計まで一貫して反映します。</p>
 
-                <p><strong>決済画面は省略しませんでした。</strong>カード番号・名義・有効期限・セキュリティコードの入力欄を持ち、支払いボタンには金額を出します。押すと待ち時間を挟んで完了画面へ進みます。</p>
+                <p><strong>決済画面は省略しませんでした。</strong>カード番号・名義・有効期限・セキュリティコードの入力欄を持ち、支払いボタンには金額を出します。押すと待ち時間を挟んで完了画面へ進み、<code>DEMO-年月日-4桁</code> の受付番号を出します。</p>
                 <p>ただし<strong>カード情報はデモ用の値を入れて読み取り専用にしました。</strong>触りに来た人が実在のカード番号を打ち込む余地をなくすためです。入力された内容はブラウザの外に出ません。</p>
+
+                <h3>画像を用意した</h3>
+                <p>商品6品・店の外観・ロゴを生成して同梱しました。<strong>以前は外部のプレースホルダ画像を6回読んでいましたが、これでページから外部への通信がゼロになりました。</strong></p>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr><th>用途</th><th>中身</th><th>容量</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>商品(写真) 6品</td><td>俯瞰・明るい木目・斜めから入る自然光で揃えた</td><td>各 20KB 前後</td></tr>
+                            <tr><td>店の外観</td><td>トップの背景。文字が読めるよう暗い膜を重ねる</td><td>75KB</td></tr>
+                            <tr><td>ロゴ</td><td>ヘッダー用</td><td>13KB</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>その後、スイーツ・フードを6品足してメニューを12品にしました。追加分は写真を用意していないので、線画の SVG イラストで揃えています。</p>
+
+                <p><strong>ロゴは2回作り直しました。</strong></p>
+                <p>1回目は細い線のカップの絵で、ヘッダーの 28px では潰れて判別できませんでした。余白を切り落として線を太らせましたが、今度は「カップの絵がある」だけで<strong>店を識別するマークになっていない</strong>という問題が残りました。</p>
+                <p>2回目は<strong>円形のエンブレム型</strong>にしました。二重の円枠の中に、コーヒーの枝を持つ人物の横顔。髪が湯気のように渦を巻いてカップの形になっています。<strong>線ではなく塊で描かせた</strong>ので、縮めても形が残ります。</p>
+                <p>サイズは 28 / 32 / 36px に実際に縮めて見比べ、枝と輪郭が読める 36px にしました。<strong>小さく置く絵は、小さくしてから確かめないと分かりません。</strong></p>
 
                 <h2>詰まった点と、直したこと</h2>
                 <p><strong>このサイトで一番まずかったのは、入力されたパスワードを記録していたことでした。</strong></p>
@@ -91,7 +122,7 @@
 
                     <div class="issue">
                         <h3>空のカートで注文できた</h3>
-                        <p>カートが空でも決済画面に進めて、合計 $0.00 のまま注文が完了しました。空のときは決済に進ませず、メニューへ案内するようにしました。</p>
+                        <p>カートが空でも決済画面に進めて、合計 ¥0 のまま注文が完了しました。空のときは決済に進ませず、メニューへ案内するようにしました。</p>
                     </div>
 
                     <div class="issue">
@@ -108,14 +139,7 @@
 
                 <h2>公開について</h2>
                 <p>静的なサイトなので、開けばすぐ動きます。サインインは入力なしで通れます。カートの中身はブラウザの中にだけ残ります。</p>
-                <p>配信はサブディレクトリなので、ビルド時に基準パスを渡し、画面遷移の基準もそれに合わせています。加えて、<code>/menu</code> のような途中の画面を直接開いてもアプリが引き受けられるよう、<code>404.html</code> に入口と同じ中身を置きました。</p>
-
-                <div class="detail-foot">
-                    <a href="../demo/cafe-site/" class="button button-primary">デモを触る</a>
-                    <a href="https://github.com/pitawo/cafe-site" target="_blank" rel="noopener"
-                        class="button">GitHub で見る</a>
-                    <a href="../index.html#works" class="back-link">← WORKS 一覧へ</a>
-                </div>
+                <p>配信はサブディレクトリなので、ビルド時に基準パスを渡し、画面遷移の基準もそれに合わせています。加えて、<code>/menu</code> のような途中の画面を直接開いてもアプリが引き受けられるよう、<code>404.html</code> で元のパスを <code>sessionStorage</code> に保存してから入口へリダイレクトし、入口側でその値を読んで元の画面に戻すようにしました。</p>
 
             </div>
         </article>
