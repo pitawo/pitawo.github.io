@@ -802,6 +802,56 @@ code {
 }
 
 /* デモ・GitHub のボタン（本文より上に置く。2026-09-02 改訂） */
+/* 詳細ページ冒頭の「課題 → 解決 → 効果」と、期間・担当範囲 */
+.detail-brief,
+.detail-facts {
+    max-width: 40rem;
+    margin: 1.75rem 0 0;
+    border-top: 1px solid var(--line);
+}
+
+.detail-brief > div,
+.detail-facts > div {
+    display: grid;
+    grid-template-columns: 5.5rem 1fr;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.detail-brief dt,
+.detail-facts dt {
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-weight: 500;
+    line-height: 1.9;
+}
+
+.detail-brief dd,
+.detail-facts dd {
+    margin: 0;
+    color: var(--ink);
+    font-size: 0.95rem;
+    line-height: 1.9;
+}
+
+.detail-facts {
+    margin-top: 1rem;
+}
+
+.detail-facts dd {
+    color: var(--text);
+    font-size: 0.85rem;
+}
+
+@media (max-width: 480px) {
+    .detail-brief > div,
+    .detail-facts > div {
+        grid-template-columns: 1fr;
+        gap: 0.1rem;
+    }
+}
+
 .detail-actions {
     display: flex;
     flex-wrap: wrap;

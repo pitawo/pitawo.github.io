@@ -41,6 +41,15 @@
                     <span>Socket.IO</span>
                     <span>Claude Code</span>
                 </p>
+                <dl class="detail-brief">
+                    <div><dt>課題</dt><dd>共有の備品は「今どれが空いているか」が誰にも分からず、返却記録の抜けや、同じ日の二重予約が起きます。</dd></div>
+                    <div><dt>解決</dt><dd>一覧で空き状況が分かり、重なる予約はその場で断る備品管理ツールを、ログイン・予約・貸出・返却まで含めて Flask で作りました。</dd></div>
+                    <div><dt>効果</dt><dd>同じ期間の予約は受け付けないので、二重予約が起きません。予約が残っている備品は削除できず、理由が画面に出ます。見学者が触っても、本物のデータには影響しない作りにしてあります。</dd></div>
+                </dl>
+                <dl class="detail-facts">
+                    <div><dt>期間</dt><dd>2026-08-28 公開</dd></div>
+                    <div><dt>担当範囲</dt><dd>要件整理・動作確認・公開まで1人で担当しました。実装は Claude Code に指示して進めました。</dd></div>
+                </dl>
                 <div class="detail-actions">
                     <a href="https://equipment-ledger-475417206801.asia-northeast1.run.app/" target="_blank" rel="noopener"
                         class="button button-primary">デモを触る</a>
