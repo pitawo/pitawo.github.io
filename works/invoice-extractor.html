@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>請求書・注文書の読み取りと一覧化 | ぴたお@AI🤖</title>
+    <meta name="description" content="請求書・注文書を LLM で読み取り、数字の突き合わせで要確認を出し、人が確認してから CSV に書き出すツール。ページを開いたあとの入力が外に出ないことを自分で確かめられるデモ付き。">
+    <meta property="og:title" content="請求書・注文書の読み取りと一覧化 | ぴたお@AI🤖">
+    <meta property="og:description" content="請求書・注文書を LLM で読み取り、数字の突き合わせで要確認を出し、人が確認してから CSV に書き出すツール。ページを開いたあとの入力が外に出ないことを自分で確かめられるデモ付き。">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="https://fav.farm/✨" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="../index.html" class="wordmark">ぴたお@AI🤖</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">TOP</a></li>
+                <li><a href="../index.html#works">WORKS</a></li>
+                <li><a href="../index.html#about">ABOUT</a></li>
+                <li><a href="../index.html#contact">CONTACT</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="detail-hero">
+            <div class="container">
+                <p class="detail-back"><a href="index.html" class="back-link">← WORKS 一覧へ</a></p>
+                <h1>請求書・注文書の読み取りと一覧化</h1>
+                <p class="detail-meta">
+                    <span>2026-09</span>
+                    <span>Python</span>
+                    <span>JavaScript</span>
+                    <span>LLM API（Claude）</span>
+                    <span>Content-Security-Policy</span>
+                </p>
+                <dl class="detail-brief">
+                    <div><dt>課題</dt><dd>請求書・注文書の内容を1枚ずつ見て表に打ち込む作業は、枚数に比例して増え、桁や日付の転記ミスも混ざります。</dd></div>
+                    <div><dt>解決</dt><dd>LLM（文章や画像を理解する AI）で日付・取引先・品目・金額を読み取り、数字が合うかを機械で突き合わせ、合わないものを「要確認」にして、人が確認・修正してから CSV に書き出すツールを作りました。</dd></div>
+                    <div><dt>効果</dt><dd>架空の書類8枚・230項目で照合し、不一致は0件でした（ただし作成も読み取りも同じ AI で n=8＝8枚だけの試験。精度の証明ではありません）。公開デモは、ページを開いたあとの入力・編集内容が外に出ません（確かめボタンを押したときの通信の試行は、ブラウザが遮断します）。その仕組みを誰でも1分で確かめられます。</dd></div>
+                </dl>
+                <dl class="detail-facts">
+                    <div><dt>期間</dt><dd>2026-09-30 制作</dd></div>
+                    <div><dt>担当範囲</dt><dd>自主制作です（利用者はいません）。要件・設計・検証は自分で担当し、実装は Claude Code に指示して進めました。</dd></div>
+                </dl>
+                <div class="detail-actions">
+                    <a href="https://pitawo.github.io/invoice-extractor/" target="_blank" rel="noopener"
+                        class="button button-primary">デモを見る</a>
+                    <a href="https://github.com/pitawo/invoice-extractor" target="_blank" rel="noopener"
+                        class="button">GitHub で見る</a>
+                </div>
+                <figure class="detail-figure">
+                    <img src="../Image/works/shots/invoice-extractor-1.webp"
+                        alt="左に書類の一覧、中央に架空の請求書の画像、右に読み取った日付・取引先・金額の編集欄が並んだ確認画面">
+                    <figcaption>公開しているデモの確認・修正画面（書類はすべて架空）</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <article class="detail">
+            <div class="container">
+
+                <h2>なぜ作ったか</h2>
+                <p>LLM に書類を読ませる業務ツールは、「便利そう」より先に「大事な書類を外に送っても大丈夫なのか」が問われます。だから機能より先に、<strong>安全を自分以外の誰かが確かめられる形にする</strong>ことを条件にしました。</p>
+
+                <h2>どう作ったか</h2>
+                <p>公開デモと、手元で動かす版の2つに分けました。</p>
+                <ul>
+                    <li><strong>公開デモ（静的ページ）</strong>：架空の書類8枚と、その読み取り結果を表示します。確認・修正と CSV 書き出しはブラウザの中だけで動きます。API は呼ばず、キーの入力欄も置いていません。</li>
+                    <li><strong>手元版（Python）</strong>：自分の PC で自分のキーで動かします。キーは環境変数からだけ読み、送信先は LLM の API エンドポイント1つだけです。</li>
+                </ul>
+                <p><strong>LLM の「確信度」は使いませんでした。</strong>自己申告の確信度は当てにならないので、明細の合計＝小計、小計＋消費税＝合計、数量×単価＝金額を機械で突き合わせ、合わない書類だけを「要確認」にしています。人が見るべき場所を、数字で決めます。</p>
+
+                <h2>安全性の確かめ方</h2>
+                <p>「保存していません」と書くだけでは証明にならないので、<strong>ブラウザ自身が、ページから外へデータを送れないようにする</strong>設定（Content-Security-Policy ＝ ブラウザに「このページは外へデータを送ってはいけない」と守らせる設定。<code>connect-src 'none'</code> ほか）をかけました。誰でも1分で確かめられます。</p>
+                <ol>
+                    <li>ページのソースで、<code>&lt;head&gt;</code> の先頭付近（文字コード指定の直後）にある CSP を見る。CSP より前に外部の読み込みはありません</li>
+                    <li>開発者ツールの Network タブで、外部ドメインへの通信が0件であることを見る</li>
+                    <li>キーの入力欄が存在しないことを見る</li>
+                </ol>
+                <p><strong>この方法でできないこと：</strong>ページ自体を取得する通信は制御できません。確かめられるのは、開いたあとの入力・編集内容が外に出ないことです。</p>
+                <p>手元版は、テストで確かめました。テスト用に作った、キーを漏らそうとする疑似の通信相手（キーを本文に返す・ヘッダを全部返す・リダイレクトする）に対して、画面・ログ・出力ファイル・例外・traceback にキーが0件であることを確認しています。</p>
+
+                <h2>詰まった点と、直したこと</h2>
+                <div class="issues">
+                    <div class="issue">
+                        <h3>書類の文字が消えた</h3>
+                        <p>架空書類を画像に描いたら、文字が白で描かれて、表の見出しの一部しか見えませんでした。描画ライブラリの既定の文字色が白だったためです。</p>
+                    </div>
+                    <div class="issue">
+                        <h3>テストが空振りしていた</h3>
+                        <p>「リダイレクト先にキーが送られない」というテストが、実装を壊しても通りました。偽サーバが POST しか記録しておらず、リダイレクトを追うと GET になって記録されなかったためです。<strong>実装をわざと壊してテストが落ちるかを確かめて、初めて気づきました。</strong></p>
+                    </div>
+                    <div class="issue">
+                        <h3>ブラウザテストの待機が動かなかった</h3>
+                        <p>CSP が文字列の評価を禁じているため、テストツールの待機処理が拒否されました。設定が実際に効いていることの証拠にもなりました。</p>
+                    </div>
+                </div>
+
+                <h2>ここから学んだこと</h2>
+                <p><strong>「0件」を確かめるテストは、検出できることを先に確かめないと意味がありません。</strong>今回は、わざと漏らしたキーを見つけられること、CSP を外した複製では外部通信が実際に出ることを先に確認してから、実物の0件を確認しました。</p>
+
+                <h2>公開について</h2>
+                <p>デモの読み取り結果は、API を呼んで作ったものではありません。同梱のプロンプトと同じ指示で、Claude Code が書類の画像を見て書いたものです。</p>
+                <p>正答率は、書類を作ったときの正解との照合（230項目で不一致0）だけです。実際の API・実際のスキャン書類での正答率と、1枚あたりのコストは<strong>未測定</strong>です。書類はすべて架空で、実在の社名・人名・住所・登録番号は使っていません。</p>
+
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>ぴたお@AI🤖</p>
+        </div>
+    </footer>
+</body>
+
+</html>
