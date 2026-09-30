@@ -9,6 +9,10 @@
 (function () {
     "use strict";
 
+    // トップのモーションの強さ。1 が基準（2026-09-30 に引き上げ）。強すぎたら 0.6、弱すぎたら 1.5 のように、ここだけ直す。
+    // 0 に近いほど静か。円の膨らみ幅・斜線の速さがまとめて変わる。
+    var MOTION_INTENSITY = 1;
+
     function goTo(items, index) {
         var clamped = Math.max(0, Math.min(items.length - 1, index));
         items[clamped].scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
@@ -128,8 +132,8 @@
 
 
     // ---------- トップのモーション（Taka 指示 2026-09-30・site.md §4 の例外）----------
-    // ヒーロー背景の「斜めの線と円」（Image/hero-bg.webp）と同じ図形を Canvas で描き、ゆっくり動かす。
-    // 円が息をするように膨らみ、斜線が一方向に流れる。それだけ。
+    // ヒーロー背景の「斜めの線と円」（Image/hero-bg.webp）と同じ図形を Canvas で描き、動かす。
+    // 円が位相をずらして膨らみ・弧が描き込まれては消え、斜線が流れ、円の中心がカーソルに寄る。それだけ。
     // 動きの計算に自前のイージング（smooth / Math.sin）を使う。ここだけの例外。
     function initHeroMotion() {
         var hero = document.getElementById("hero");
@@ -145,6 +149,11 @@
         var raf = 0;
         var startTime = 0;
         var visible = true;
+        var px = 0; // 円の中心のずれ（マウス追従は 2026-09-30 に外したので常に 0）
+        var py = 0;
+        var tx = 0;
+        var ty = 0;
+        var lastNow = 0;
 
         // 0→1 をなめらかに（端でゆっくり）
         function smooth(x) {
@@ -172,17 +181,27 @@
             var color = "102,126,234";
             var alpha = narrow ? 0.2 : 0.34; // 狭い幅では文字と重なるので薄くする
 
-            // 円：中心を少しずつずらした4つ。ゆっくり膨らんで縮む
+            // 円：中心を少しずつずらした4つ。円ごとに位相をずらして膨らむ。
+            // 弧は周期的に「描き込む → そのまま → 端から消える」を繰り返す（線を引く動き）
+            var I = MOTION_INTENSITY;
             ctx.lineWidth = 1;
             for (var i = 0; i < 4; i++) {
-                var r = R * (0.32 + i * 0.26) * (1 + 0.025 * Math.sin(t * 0.5 + i * 1.3));
-                var p = intro ? smooth((t - i * 0.25) / 1.8) : 1;
-                if (p <= 0) {
+                var r = R * (0.32 + i * 0.26) * (1 + 0.075 * I * Math.sin(t * 1.1 + i * 1.7));
+                var head = 1;
+                var tail = 0;
+                if (intro) {
+                    var u = (t / 9 + i * 0.22) % 1;
+                    head = smooth(u / 0.3);
+                    tail = smooth((u - 0.7) / 0.3);
+                }
+                if (head - tail <= 0.001) {
                     continue;
                 }
+                var cx = ax - i * R * 0.06 + px * (14 + i * 9) * I;
+                var cy = ay + i * R * 0.04 + py * (14 + i * 9) * I;
                 ctx.strokeStyle = "rgba(" + color + "," + alpha + ")";
                 ctx.beginPath();
-                ctx.arc(ax - i * R * 0.06, ay + i * R * 0.04, r, Math.PI, Math.PI + Math.PI * 2 * p);
+                ctx.arc(cx, cy, r, Math.PI + Math.PI * 2 * tail, Math.PI + Math.PI * 2 * head);
                 ctx.stroke();
             }
 
@@ -191,7 +210,7 @@
             var count = 12;
             var span = gap * count;
             var c0 = ax + ay - R * 0.5;
-            var shift = (t * 5) % gap;
+            var shift = (t * 30 * I) % gap;
             var maxR = R * 1.06;
             var lp = intro ? smooth((t - 0.4) / 1.6) : 1;
             for (var k = -count; k <= count; k++) {
@@ -206,10 +225,12 @@
                 if (Math.abs(d) >= maxR) {
                     continue;
                 }
-                var half = Math.sqrt(maxR * maxR - d * d) * lp;
+                // 線の端（円との境界）が、線の位置に応じて伸び縮みしながら回るように動く
+                var edge = 1 + 0.05 * I * Math.sin(c * 0.02 + t * 1.3);
+                var half = Math.sqrt(maxR * maxR - d * d) * lp * edge;
                 // 線の中点と方向 (1,-1)/√2
-                var mx = ax + d / Math.SQRT2;
-                var my = ay + d / Math.SQRT2;
+                var mx = ax + px * 8 * I + d / Math.SQRT2;
+                var my = ay + py * 8 * I + d / Math.SQRT2;
                 var ux = half / Math.SQRT2;
                 ctx.strokeStyle = "rgba(" + color + "," + (alpha * fade).toFixed(3) + ")";
                 ctx.beginPath();
@@ -224,6 +245,11 @@
             if (!visible || document.hidden || reduced.matches) {
                 return;
             }
+            var dt = lastNow ? Math.min((now - lastNow) / 1000, 0.1) : 0.016;
+            lastNow = now;
+            var k = 1 - Math.exp(-dt * 4);
+            px += (tx - px) * k;
+            py += (ty - py) * k;
             draw((now - startTime) / 1000, true);
             raf = requestAnimationFrame(frame);
         }
@@ -240,6 +266,7 @@
         }
 
         function stop() {
+            lastNow = 0;
             if (raf) {
                 cancelAnimationFrame(raf);
                 raf = 0;
