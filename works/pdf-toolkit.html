@@ -55,12 +55,12 @@
                     <div><dt>担当範囲</dt><dd>要件整理・動作確認・公開まで1人で担当しました。実装は Claude Code に指示して進めました。</dd></div>
                 </dl>
                 <div class="detail-actions">
-                    <a href="https://pdf-toolkit-gqdtevrl2qeg9bqfw4fpmb.streamlit.app/" target="_blank" rel="noopener"
+                    <a href="https://pdf-toolkit-475417206801.asia-northeast1.run.app/" target="_blank" rel="noopener"
                         class="button button-primary">アプリを開く</a>
                     <a href="https://github.com/pitawo/pdf-toolkit" target="_blank" rel="noopener"
                         class="button">GitHub で見る</a>
                 </div>
-                <p class="detail-note">無料枠でスリープします。起動まで数分かかることがあります。</p>
+                <p class="detail-note">しばらく使われていないと、開くまで数秒かかることがあります。</p>
                 <figure class="detail-figure">
                     <img src="../Image/works/pdf-toolkit.svg" alt="左にアップロードしたファイルの一覧、右に変換オプションが並んだ画面のイメージ">
                 </figure>
@@ -72,7 +72,7 @@
 
                 <h2>なぜ作ったか</h2>
                 <p>PDF の細かい作業は、そのたびに変換サービスを検索して使っていました。ただ、この種のサービスはどれも<strong>手元のファイルを相手のサーバーに預ける</strong>ことになります。中身を見せたくない資料では使いにくくなります。</p>
-                <p>自分がやりたい操作は4つ（変換・結合・ページ番号・並べ替え）しかなかったので、その4つだけが載った画面を作りました。手元で起動すればファイルは自分のパソコンから出ません。誰でも触れる版として、同じコードを Streamlit Cloud にも置いてあります。</p>
+                <p>自分がやりたい操作は4つ（変換・結合・ページ番号・並べ替え）しかなかったので、その4つだけが載った画面を作りました。手元で起動すればファイルは自分のパソコンから出ません。誰でも触れる版として、同じコードを Google Cloud の Cloud Run にも置いてあります。</p>
 
                 <h2>どう作ったか</h2>
                 <p>画面は Streamlit で、PDF の操作は PyPDF2 と reportlab。Office 文書（Word / Excel / PowerPoint）の変換だけは Python のライブラリでは精度が出ないので、LibreOffice をコマンドとして呼び出して変換させています。もともとは自分だけが使っていたものを、公開するにあたって全体を見直しました。</p>
@@ -120,8 +120,9 @@
                 <p>公開する場所に置くというのは、<strong>自分がやらない操作を全部やられる場所に置く</strong>ということでした。修正12件のうち、機能を足したものは1つもありません。</p>
 
                 <h2>公開について</h2>
-                <p>Streamlit Cloud で公開中です。アカウント登録なしでその場で使えます。手元で動かす場合は LibreOffice のインストールが要ります（Office 文書を変換しないなら不要）。</p>
-                <p>Streamlit Cloud の<strong>無料枠</strong>で動かしているので、しばらくアクセスがないとアプリがスリープします。その場合は起動を促す画面が先に出ますので、ボタンを押してから立ち上がるまで、数分かかることがあります。</p>
+                <p>Google Cloud の Cloud Run で公開中です。アカウント登録なしでその場で使えます。手元で動かす場合は LibreOffice のインストールが要ります（Office 文書を変換しないなら不要）。</p>
+                <p>元は Streamlit Cloud の無料枠で動かしていましたが、しばらくアクセスがないとスリープし、起動を促す画面が先に出て、立ち上がるまで数分かかることがありました。それで Cloud Run に移しました。</p>
+                <p>しばらくアクセスがないとアプリは止まり、次に開いたときに起動し直します。<strong>約21分アクセスがなかったあとに開いたところ、サーバーが応答するまで実測で2.2秒、画面にアップロード欄が出るまで3.6秒でした</strong>（ブラウザを自動操作して測った1回の値です。サーバー側のログで新しい台が起動したことまでは確認していません）。移したあとに、画像・Word 文書の PDF 変換、結合、ページ番号、並べ替えを架空のファイルで1回ずつ通し、出力が PDF として開けることを確認しました。</p>
 
             </div>
         </article>
