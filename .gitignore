@@ -33,3 +33,6 @@ TODO.local.md
 # ローカルには残す。HTML はここから生成するが、生成元を公開する必要はない。
 source/
 README.internal.md
+
+# 表示確認のスクショ（公開しない）
+.preview/

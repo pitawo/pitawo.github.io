@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WORKS 一覧 | ぴたお@AI🤖</title>
-    <meta name="description" content="これまで作ったもの全8件の一覧。企画理由・詰まった点・直し方まで、詳細ページで見られます。">
+    <meta name="description" content="これまで作ったもの全9件の一覧。企画理由・詰まった点・直し方まで、詳細ページで見られます。">
     <meta property="og:title" content="WORKS 一覧 | ぴたお@AI🤖">
-    <meta property="og:description" content="これまで作ったもの全8件の一覧。企画理由・詰まった点・直し方まで、詳細ページで見られます。">
+    <meta property="og:description" content="これまで作ったもの全9件の一覧。企画理由・詰まった点・直し方まで、詳細ページで見られます。">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="https://fav.farm/✨" />
@@ -42,7 +42,10 @@
             <div class="container">
 
                 <!-- 実績は source/works/*.md から生成される。HTML を直接編集しない -->
-                <ul class="works-list">
+                <div class="works-group">
+                    <h2 class="works-group-title">書類・事務の手作業を減らす</h2>
+                    <p class="works-group-lead">書類やアンケート回答を1件ずつ見て打ち込む、変換する、送る作業を自動にします。</p>
+                    <ul class="works-list">
                     <li>
                         <a href="gas-form-scoring.html" class="work-link">
                             <div class="work-thumb">
@@ -84,71 +87,6 @@
                         </a>
                     </li>
                     <li>
-                        <a href="equipment-ledger.html" class="work-link">
-                            <div class="work-thumb">
-                                <img src="../Image/works/equipment-ledger.svg" alt="左に予約フォーム、右に備品の稼働状況カードが並んだ画面のイメージ">
-                            </div>
-                            <div class="work-body">
-                                <span class="work-category">Web App</span>
-                                <div class="work-head">
-                                    <h3>備品貸出管理アプリ</h3>
-                                    <span class="work-date">2026-08</span>
-                                </div>
-                                <p class="work-desc">共有備品の貸出・返却・予約を1画面で管理。同じ期間の予約の重複は自動で断る。</p>
-                                <ul class="tags">
-                                    <li class="tag">Python</li>
-                                    <li class="tag">Flask</li>
-                                    <li class="tag">Socket.IO</li>
-                                    <li class="tag">Claude Code</li>
-                                </ul>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="company-research.html" class="work-link">
-                            <div class="work-thumb">
-                                <img src="../Image/works/company-research.svg" alt="財務指標のカードと業績の折れ線グラフ、注記が並んだ画面のイメージ">
-                            </div>
-                            <div class="work-body">
-                                <span class="work-category">Tool</span>
-                                <div class="work-head">
-                                    <h3>企業リサーチシステム</h3>
-                                    <span class="work-date">2026-08</span>
-                                </div>
-                                <p class="work-desc">証券コードを入れるだけで上場企業の財務を一覧・グラフ化。数字のずれは検証して注記する。</p>
-                                <ul class="tags">
-                                    <li class="tag">Python</li>
-                                    <li class="tag">Streamlit</li>
-                                    <li class="tag">yfinance</li>
-                                    <li class="tag">Plotly</li>
-                                    <li class="tag">Claude Code</li>
-                                </ul>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="youtube-research.html" class="work-link">
-                            <div class="work-thumb">
-                                <img src="../Image/works/youtube-research.svg" alt="URL 入力欄の下に再生回数などの統計カードとグラフが並んだ画面のイメージ">
-                            </div>
-                            <div class="work-body">
-                                <span class="work-category">Tool</span>
-                                <div class="work-head">
-                                    <h3>YouTube リサーチシステム</h3>
-                                    <span class="work-date">2026-08</span>
-                                </div>
-                                <p class="work-desc">動画やチャンネルの URL を貼るだけで、再生数・反応率などを並べて分析。CSV で書き出せる。</p>
-                                <ul class="tags">
-                                    <li class="tag">Python</li>
-                                    <li class="tag">Streamlit</li>
-                                    <li class="tag">YouTube Data API v3</li>
-                                    <li class="tag">SQLite</li>
-                                    <li class="tag">Claude Code</li>
-                                </ul>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
                         <a href="pdf-toolkit.html" class="work-link">
                             <div class="work-thumb">
                                 <img src="../Image/works/pdf-toolkit.svg" alt="左にアップロードしたファイルの一覧、右に変換オプションが並んだ画面のイメージ">
@@ -165,6 +103,33 @@
                                     <li class="tag">Streamlit</li>
                                     <li class="tag">PyPDF2</li>
                                     <li class="tag">LibreOffice</li>
+                                    <li class="tag">Claude Code</li>
+                                </ul>
+                            </div>
+                        </a>
+                    </li>
+                    </ul>
+                </div>
+                <div class="works-group">
+                    <h2 class="works-group-title">お店・チームの仕組みを Web に</h2>
+                    <p class="works-group-lead">紙やチャットで回している予約・注文・動画配信を、ブラウザで使える形にします。</p>
+                    <ul class="works-list">
+                    <li>
+                        <a href="equipment-ledger.html" class="work-link">
+                            <div class="work-thumb">
+                                <img src="../Image/works/equipment-ledger.svg" alt="左に予約フォーム、右に備品の稼働状況カードが並んだ画面のイメージ">
+                            </div>
+                            <div class="work-body">
+                                <span class="work-category">Web App</span>
+                                <div class="work-head">
+                                    <h3>備品貸出管理アプリ</h3>
+                                    <span class="work-date">2026-08</span>
+                                </div>
+                                <p class="work-desc">共有備品の貸出・返却・予約を1画面で管理。同じ期間の予約の重複は自動で断る。</p>
+                                <ul class="tags">
+                                    <li class="tag">Python</li>
+                                    <li class="tag">Flask</li>
+                                    <li class="tag">Socket.IO</li>
                                     <li class="tag">Claude Code</li>
                                 </ul>
                             </div>
@@ -212,6 +177,56 @@
                             </div>
                         </a>
                     </li>
+                    </ul>
+                </div>
+                <div class="works-group">
+                    <h2 class="works-group-title">調べもの・日々の段取りを速くする</h2>
+                    <p class="works-group-lead">数字集めや記録など、毎回の手作業を1画面にまとめます。</p>
+                    <ul class="works-list">
+                    <li>
+                        <a href="company-research.html" class="work-link">
+                            <div class="work-thumb">
+                                <img src="../Image/works/company-research.svg" alt="財務指標のカードと業績の折れ線グラフ、注記が並んだ画面のイメージ">
+                            </div>
+                            <div class="work-body">
+                                <span class="work-category">Tool</span>
+                                <div class="work-head">
+                                    <h3>企業リサーチシステム</h3>
+                                    <span class="work-date">2026-08</span>
+                                </div>
+                                <p class="work-desc">証券コードを入れるだけで上場企業の財務を一覧・グラフ化。数字のずれは検証して注記する。</p>
+                                <ul class="tags">
+                                    <li class="tag">Python</li>
+                                    <li class="tag">Streamlit</li>
+                                    <li class="tag">yfinance</li>
+                                    <li class="tag">Plotly</li>
+                                    <li class="tag">Claude Code</li>
+                                </ul>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="youtube-research.html" class="work-link">
+                            <div class="work-thumb">
+                                <img src="../Image/works/youtube-research.svg" alt="URL 入力欄の下に再生回数などの統計カードとグラフが並んだ画面のイメージ">
+                            </div>
+                            <div class="work-body">
+                                <span class="work-category">Tool</span>
+                                <div class="work-head">
+                                    <h3>YouTube リサーチシステム</h3>
+                                    <span class="work-date">2026-08</span>
+                                </div>
+                                <p class="work-desc">動画やチャンネルの URL を貼るだけで、再生数・反応率などを並べて分析。CSV で書き出せる。</p>
+                                <ul class="tags">
+                                    <li class="tag">Python</li>
+                                    <li class="tag">Streamlit</li>
+                                    <li class="tag">YouTube Data API v3</li>
+                                    <li class="tag">SQLite</li>
+                                    <li class="tag">Claude Code</li>
+                                </ul>
+                            </div>
+                        </a>
+                    </li>
                     <li>
                         <a href="secretary-app.html" class="work-link">
                             <div class="work-thumb">
@@ -232,7 +247,8 @@
                             </div>
                         </a>
                     </li>
-                </ul>
+                    </ul>
+                </div>
             </div>
         </section>
     </main>

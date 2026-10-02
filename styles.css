@@ -947,3 +947,54 @@ code {
         height: 2.25rem;
     }
 }
+
+/* ---------- 困りごとの入口（2026-10-02） ---------- */
+
+.works-lead {
+    max-width: 40rem;
+    margin: -1.5rem 0 2rem;
+    font-size: 0.9rem;
+    color: var(--text);
+}
+
+.works-group + .works-group {
+    margin-top: 3.5rem;
+}
+
+.works-group-title {
+    margin: 0 0 0.35rem;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--ink);
+}
+
+.works-group-lead {
+    max-width: 40rem;
+    margin: 0 0 1.25rem;
+    font-size: 0.88rem;
+    color: var(--text);
+}
+
+/* 詳細ページ冒頭の「同じ困りごとを持つ人と、頼めること」。課題・解決・効果の直下 */
+.detail-need {
+    max-width: 40rem;
+    margin: 1rem 0 0;
+    padding: 1rem 1.1rem;
+    background-color: var(--accent-soft);
+    border-left: 2px solid var(--accent);
+}
+
+.detail-need h2 {
+    margin: 0 0 0.4rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+}
+
+.detail-need p {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.9;
+    color: var(--ink);
+}
